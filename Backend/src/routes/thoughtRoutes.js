@@ -11,4 +11,7 @@ router.route("/")
   .get(ThoughtController.getThoughts)
   .post(verifyToken, ThoughtController.create)
 
+router.route("/:thoughtId")
+  .put(verifyToken, ThoughtController.update)
+
 module.exports = router

@@ -34,7 +34,11 @@ module.exports = class AuthController {
       // Generate token
       const token = generateToken({ id: createdUser, email })
 
-      res.status(200).json({ user: createdUser, token })
+      res.status(200).json({
+        error: null,
+        user: createdUser,
+        token
+      })
     } catch (error) {
       res.status(500).json({ error })
     }
@@ -56,7 +60,11 @@ module.exports = class AuthController {
       // Generate token
       const token = generateToken({ id: user.id, email })
 
-      res.status(200).json({ user, token })
+      res.status(200).json({
+        error: null,
+        user,
+        token
+      })
     } catch (error) {
       res.status(500).json({ error })
     }
