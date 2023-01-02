@@ -32,9 +32,31 @@ module.exports = class AuthController {
       const createdUser = await User.create(user)
 
       // Generate token
-      const token = await generateToken({ id: createdUser, email })
+      const token = generateToken({ id: createdUser, email })
 
       res.status(200).json({ user: createdUser, token })
+    } catch (error) {
+      res.status(500).json({ error })
+    }
+  }
+
+  static async login(req, res) {
+    try {
+      const { email, password } = req.body
+
+      const emptyFields = !email || !password
+      if (emptyFields) return res.status(400).json({ error: "Preencha todos os campos para continuar" })
+
+      const user = await User.findOne({ where: { email } })
+      if (!user) return res.status(401).json({ error: "Usuário e/ou senha inválidos!" })
+
+      const passwordMatch = bcrypt.compareSync(password, user.password)
+      if (!passwordMatch) return res.status(401).json({ error: "Usuário e/ou senha inválidos!" })
+
+      // Generate token
+      const token = generateToken({ id: user.id, email })
+
+      res.status(200).json({ user, token })
     } catch (error) {
       res.status(500).json({ error })
     }
