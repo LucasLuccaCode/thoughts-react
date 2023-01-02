@@ -4,6 +4,9 @@ const express = require("express")
 const app = express()
 const PORT = 3000
 
+// Connection with database
+const connection = require("./src/db/connection")
+
 // Handle with form data and json
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -18,4 +21,6 @@ app.use("*", (req, res) => {
 })
 
 // Start server
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
+connection
+  .sync()
+  .then(() => app.listen(PORT, () => console.log(`Server listening on port ${PORT}`)))
