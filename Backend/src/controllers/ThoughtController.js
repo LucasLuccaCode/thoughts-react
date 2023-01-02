@@ -37,7 +37,23 @@ module.exports = class ThoughtController {
         thoughts
       })
     } catch (error) {
-      res.stats(500).json({ error })
+      res.status(500).json({ error })
+    }
+  }
+
+  static async getById(req, res) {
+    try {
+      const { thoughtId } = req.params
+
+      const thought = await Thought.findByPk(thoughtId)
+      if (!thought) return res.status(400).json({ error: "Pensamento não encontrado" })
+
+      res.status(200).json({
+        error: null,
+        thought
+      })
+    } catch (error) {
+      res.status(500).json({ error })
     }
   }
 
@@ -52,17 +68,29 @@ module.exports = class ThoughtController {
       if (!userIdsMatch) return res.status(401).json({ error: "Acesso negado!" })
 
       const thought = await Thought.findOne({ where: { id: thoughtId, userId } })
-      if (!thought) res.status(400).json({ error: "Pensamento não encontrado" })
+      if (!thought) return res.status(400).json({ error: "Pensamento não encontrado" })
 
       const updatedThought = await thought.update({ content })
 
       res.status(200).json({
         error: null,
-        message: "Pensamento atualizado",
+        message: "Pensamento atualizado com sucesso",
         thought: updatedThought
       })
     } catch (error) {
       res.status(500).json({ error })
     }
+  }
+
+  static async delete(req, res) {
+    const { thoughtId } = req.params
+    const tokenUserId = req.user.id
+
+    await Thought.destroy({ where: { id: thoughtId, userId: tokenUserId } })
+
+    res.status(200).json({
+      error: null,
+      message: "Pensamento deletado com sucesso"
+    })
   }
 }
