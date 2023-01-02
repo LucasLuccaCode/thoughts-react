@@ -7,6 +7,9 @@ const PORT = 3000
 // Connection with database
 const connection = require("./src/db/connection")
 
+// Models
+const User = require("./src/models/User")
+
 // Handle with form data and json
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
