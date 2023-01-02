@@ -7,6 +7,8 @@ const verifyToken = require("../middlewares/checkTokenMiddleware")
 // Controller
 const ThoughtController = require("../controllers/ThoughtController")
 
-router.post("/", verifyToken, ThoughtController.create)
+router.route("/")
+  .get(ThoughtController.getThoughts)
+  .post(verifyToken, ThoughtController.create)
 
 module.exports = router
