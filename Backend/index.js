@@ -16,6 +16,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Routes 
+const authRoutes = require("./src/routes/authRoutes")
+app.use("/", authRoutes)
+
 app.get("/", (req, res) => {
   res.json({ hello: "world" })
 })
