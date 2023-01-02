@@ -19,6 +19,9 @@ app.use(express.json())
 const authRoutes = require("./src/routes/authRoutes")
 app.use("/", authRoutes)
 
+const thoughtRoutes = require("./src/routes/thoughtRoutes")
+app.use("/thoughts", thoughtRoutes)
+
 app.get("/", (req, res) => {
   res.json({ hello: "world" })
 })
