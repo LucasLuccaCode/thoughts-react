@@ -31,4 +31,26 @@ module.exports = class ThoughtController {
       res.status(500).json({ error })
     }
   }
+
+  static async delete(req, res) {
+    const { thoughtId, commentId } = req.params
+    const tokenUserId = req.user.id
+
+    const comment = await Comment.findOne({
+      where: {
+        id: commentId,
+        userId: tokenUserId,
+        thoughtId
+      }
+    })
+
+    if (!comment) return res.status(400).json({ error: "Comentário não encontrado" })
+
+    await comment.destroy()
+
+    res.status(200).json({
+      error: null,
+      message: "Comentário deletado com sucesso"
+    })
+  }
 }
