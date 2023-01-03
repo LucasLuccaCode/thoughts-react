@@ -30,6 +30,9 @@ app.use("/thoughts", thoughtRoutes)
 const commentRoutes = require("./src/routes/commentRoutes")
 app.use("/thoughts", commentRoutes)
 
+const likeRoutes = require("./src/routes/likeRoutes")
+app.use("/thoughts", likeRoutes)
+
 app.get("/", (req, res) => {
   res.json({ hello: "world" })
 })

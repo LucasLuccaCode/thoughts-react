@@ -25,20 +25,20 @@ Like.init({
 
 // Associations
 User.hasMany(Like)
-Like.belongsTo(Author, {
+Like.belongsTo(User, {
   foreignKey: "userId",
-  as: author
+  as: "author"
 })
 
 Thought.hasMany(Like, {
   foreignKey: "thoughtId",
-  as: "Likes",
+  as: "likes",
   onDelete: "CASCADE",
   onUpdate: "CASCADE"
 })
 Like.belongsTo(Thought, {
   foreignKey: "thoughtId",
-  as: "post"
+  as: "thought"
 })
 
 module.exports = Like

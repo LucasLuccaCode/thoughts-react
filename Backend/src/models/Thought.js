@@ -6,23 +6,7 @@ const sequelize = require("../db/connection")
 // Other models
 const User = require("./User")
 
-class Thought extends Model {
-  static async like(userId, postId) {
-    // Adiciona um registro à tabela de curtidas
-    await sequelize.query(
-      `INSERT INTO likes (userId, postId) VALUES (:userId, :postId)`,
-      { replacements: { userId, postId } }
-    );
-  }
-
-  static async unlike(userId, postId) {
-    // Remove o registro correspondente da tabela de curtidas
-    await sequelize.query(
-      `DELETE FROM likes WHERE userId = :userId AND postId = :postId`,
-      { replacements: { userId, postId } }
-    );
-  }
-}
+class Thought extends Model { }
 
 Thought.init({
   content: {
