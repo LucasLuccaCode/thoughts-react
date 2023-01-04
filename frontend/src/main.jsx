@@ -7,6 +7,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 // Pages
 import NotFound from './pages/NotFound'
 import Root from './pages/Root'
+import Register, {
+  action as registerAction
+} from './pages/Register'
 
 const router = createBrowserRouter([
   {
@@ -15,7 +18,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: "thoughts",
+        path: "/",
         element: <h1>Pensamentos</h1>
       },
       {
@@ -24,7 +27,8 @@ const router = createBrowserRouter([
       },
       {
         path: "register",
-        element: <h1>Cadastrar</h1>
+        element: <Register />,
+        action: registerAction
       }
     ]
   }
