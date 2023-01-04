@@ -9,7 +9,6 @@ module.exports = class AuthController {
   static async register(req, res) {
     try {
       const { name, email, password, confirm_password } = req.body
-      console.log({ name, email, password, confirm_password })
 
       const emptyFields = !name || !email || !password || !confirm_password
       if (emptyFields) return res.status(400).json({ error: "Preencha todos os campos para continuar" })

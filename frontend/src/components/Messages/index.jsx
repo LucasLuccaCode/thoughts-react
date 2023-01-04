@@ -1,11 +1,17 @@
-export default function Messages({ messages }) {
+import { useContext } from "react"
+import { MessageContext } from "../../contexts/MessageProvider"
+import "./styles.css"
+
+export default function Messages() {
+  const { message } = useContext(MessageContext)
+
   return (
     <div className="c-messages max-width">
       {
-        messages.error && <p class="error">{messages.error}</p>
+        message.error && <p className="error">{message.error}</p>
       }
       {
-        messages.success && <p class="success">{messages.success}</p>
+        message.success && <p className="success">{message.success}</p>
       }
     </div>
   )
