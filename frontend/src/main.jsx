@@ -1,12 +1,16 @@
 import React from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { MessageProvider } from './contexts/message'
+
 
 // Pages
-import NotFound from './pages/NotFound'
 import Root from './pages/Root'
+
+import NotFound from './pages/NotFound'
+
 import Register, {
   action as registerAction
 } from './pages/Register'
@@ -36,6 +40,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MessageProvider>
+      <RouterProvider router={router} />
+    </MessageProvider>
   </React.StrictMode>,
 )
