@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth"
 import { MessageContext } from "../../contexts/message"
 import { api } from "../../services/api"
@@ -7,7 +7,6 @@ import { api } from "../../services/api"
 import UserForm from "../../components/UserForm"
 
 export default function Login() {
-  const navigate = useNavigate()
   const { setMessage } = useContext(MessageContext)
   const { authenticate, authenticated } = useContext(AuthContext)
 
@@ -28,7 +27,7 @@ export default function Login() {
     }
   }
 
-  if(authenticated) return navigate("/dashboard")
+  if(authenticated) return <Navigate to={`/dashboard`} />
 
   return (
     <div className="c-auth page max-width">

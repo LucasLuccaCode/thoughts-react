@@ -5,16 +5,14 @@ import './index.css'
 
 import { MessageProvider } from './contexts/message'
 
-
 // Pages
 import Root from './pages/Root'
-
 import NotFound from './pages/NotFound'
-
-import { PrivateRoute } from "./routes/privateRoutes"
-
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+
+import { PrivateRoute } from "./routes/privateRoutes"
 import { AuthProvider } from './contexts/auth'
 
 const router = createBrowserRouter([
@@ -33,7 +31,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/dashboard",
-            element: <h1>Dashboard</h1>
+            element: <Dashboard />
           }
         ]
       },
