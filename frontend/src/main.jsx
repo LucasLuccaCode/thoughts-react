@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound'
 
 import Register from './pages/Register'
 import Login from './pages/Login'
+import { AuthProvider } from './contexts/auth'
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <MessageProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </MessageProvider>
   </React.StrictMode>,
 )
