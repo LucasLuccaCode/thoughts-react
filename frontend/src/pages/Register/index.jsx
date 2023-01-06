@@ -1,36 +1,36 @@
+import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import UserForm from "../../components/UserForm"
-
-export const action = async ({ params, request }) => {
-  try {
-    const formData = await request.formData();
-    const updates = Object.fromEntries(formData);
-    const dataJson = JSON.stringify(updates)
-
-    const res = await fetch(`http://localhost:3000/register`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: dataJson
-      }
-    );
-    const data = await res.json()
-    console.log(data)
-    if (!res.error) throw res.error;
-    
-    return { ok: true };
-  } catch (error) {
-    console.log(error)
-  }
-}
+import { MessageContext } from "../../contexts/message"
+import { api } from "../../services/api"
 
 export default function Register() {
+  const navigate = useNavigate()
+  const { setMessage } = useContext(MessageContext)
+
+  const handleSignUp = async (e) => {
+    e.preventDefault()
+    setMessage()
+
+    try {
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+
+      const res = await api.post("/register", data)
+      console.log(res)
+
+      setMessage({ success: res.data.message })
+      return navigate("/login")
+    } catch ({ response}) {
+      setMessage({ error: response.data.error })
+    }
+  }
+
   return (
     <div className="c-auth page max-width">
       <h1>Cadastre-se</h1>
 
-      <UserForm action="register" btnText="Cadastrar" />
+      <UserForm action="register" btnText="Cadastrar" handleForm={handleSignUp} />
     </div>
   )
 }

@@ -29,15 +29,11 @@ module.exports = class AuthController {
       }
 
       // Create user
-      const createdUser = await User.create(user)
-
-      // Generate token
-      const token = generateToken({ id: createdUser, email })
+      await User.create(user)
 
       res.status(200).json({
         error: null,
-        user: createdUser,
-        token
+        message: "Conta criada com sucesso"
       })
     } catch (error) {
       res.status(500).json({ error })

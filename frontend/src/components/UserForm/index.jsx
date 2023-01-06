@@ -1,9 +1,9 @@
 import { Form, Link } from "react-router-dom"
 import "./styles.css"
 
-export default function UserForm({ action, btnText }) {
+export default function UserForm({ action, btnText, handleForm }) {
   return (
-    <Form method="POST" className="c-form">
+    <Form method="POST" onSubmit={handleForm} className="c-form">
       {
         action !== "login" && (
           <div className="c-form__input">

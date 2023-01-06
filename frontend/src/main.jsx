@@ -11,9 +11,7 @@ import Root from './pages/Root'
 
 import NotFound from './pages/NotFound'
 
-import Register, {
-  action as registerAction
-} from './pages/Register'
+import Register from './pages/Register'
 
 const router = createBrowserRouter([
   {
@@ -31,8 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "register",
-        element: <Register />,
-        action: registerAction
+        element: <Register />
       }
     ]
   }
