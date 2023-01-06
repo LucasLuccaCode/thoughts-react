@@ -7,11 +7,14 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const userStorage = localStorage.getItem("@auth:user")
-    const tokenStorage = localStorage.getItem("@auth:token")
-    if (userStorage && tokenStorage) {
-      setUser(JSON.parse(userStorage))
+    const loadDataStorage = () => {
+      const userStorage = localStorage.getItem("@auth:user")
+      const tokenStorage = localStorage.getItem("@auth:token")
+      if (userStorage && tokenStorage) {
+        setUser(JSON.parse(userStorage))
+      }
     }
+    loadDataStorage()
   }, [])
 
   const logout = () => {

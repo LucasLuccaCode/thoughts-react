@@ -1,10 +1,16 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth";
 import "./styles.css"
 
 export default function Header() {
-  const { user } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate("/login")
+  }
 
   return (
     <header>
@@ -25,7 +31,7 @@ export default function Header() {
                   <Link to={`/dashboard`}>Dashboard</Link>
                 </li>
                 <li>
-                  <Link to={`/logout`}>Sair</Link>
+                  <button onClick={handleLogout}>{user.name}</button>
                 </li>
               </>
             ) : (

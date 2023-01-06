@@ -40,17 +40,23 @@ header ul {
   flex-wrap: wrap;
 }
 
-header li a {
+header li a,
+header li button {
   display: flex;
   padding: .7rem var(--margin-h);
   font-size: .75rem;
-  /* font-weight: bold; */
   font-family: sans-serif;
   color: #aaaab0;
   transition: .3s ease;
 }
 
-header li a:hover {
+header li a:hover,
+header li button:hover {
   background: rgba(255, 255, 255, .05);
   color: var(--details-color);
+}
+
+header li button {
+  cursor: pointer;
+  background: transparent;
 }
