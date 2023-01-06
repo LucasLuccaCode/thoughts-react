@@ -11,6 +11,8 @@ import Root from './pages/Root'
 
 import NotFound from './pages/NotFound'
 
+import { PrivateRoute } from "./routes/privateRoutes"
+
 import Register from './pages/Register'
 import Login from './pages/Login'
 import { AuthProvider } from './contexts/auth'
@@ -26,15 +28,21 @@ const router = createBrowserRouter([
         element: <h1>Pensamentos</h1>
       },
       {
-        path: "dashboard",
-        element: <h1>Dashboard</h1>
+        path: "/dashboard",
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <h1>Dashboard</h1>
+          }
+        ]
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login />
       },
       {
-        path: "register",
+        path: "/register",
         element: <Register />
       }
     ]

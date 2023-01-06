@@ -8,27 +8,52 @@ export default function UserForm({ action, btnText, handleForm }) {
         action !== "login" && (
           <div className="c-form__input">
             <label htmlFor="name">Nome: </label>
-            <input type="text" name="name" id="name" required autoFocus />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              autoFocus={action === "register"}
+            />
           </div>
         )
       }
       <div className="c-form__input">
         <label htmlFor="email">Email: </label>
-        <input type="email" name="email" id="email" required />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          autoFocus={action === "login"}
+        />
       </div>
       <div className="c-form__input">
         <label htmlFor="password">Senha: </label>
-        <input type="password" name="password" id="password" required />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          required
+        />
       </div>
       {
         action !== "login" && (
           <div className="c-form__input">
             <label htmlFor="confirm_password">Confirmar senha: </label>
-            <input type="password" name="confirm_password" id="confirm_password" required />
+            <input
+              type="password"
+              name="confirm_password"
+              id="confirm_password"
+              required
+            />
           </div>
         )
       }
-      <input className="btn" type="submit" value={btnText} />
+      <input className="btn"
+        type="submit"
+        value={btnText}
+      />
       {
         action === "login" ? (
           <p>Não tem uma conta? <Link to={`/register`}>Clique aqui</Link></p>
