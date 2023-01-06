@@ -12,6 +12,7 @@ import Root from './pages/Root'
 import NotFound from './pages/NotFound'
 
 import Register from './pages/Register'
+import Login from './pages/Login'
 
 const router = createBrowserRouter([
   {
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
         element: <h1>Pensamentos</h1>
       },
       {
+        path: "dashboard",
+        element: <h1>Dashboard</h1>
+      },
+      {
         path: "login",
-        element: <h1>Login</h1>
+        element: <Login />
       },
       {
         path: "register",

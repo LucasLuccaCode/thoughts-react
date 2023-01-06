@@ -58,7 +58,11 @@ module.exports = class AuthController {
 
       res.status(200).json({
         error: null,
-        user,
+        message: "Login realizado com sucesso",
+        user: {
+          id: user.id,
+          name: user.name
+        },
         token
       })
     } catch (error) {
