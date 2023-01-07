@@ -1,0 +1,22 @@
+.c-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.c-loader__spinning {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50px;
+  border: .15rem solid rgba(255, 255, 255, .2);
+  border-top: .15rem solid var(--details-color);
+  animation: is-spinning 1s linear infinite;
+}
+
+@keyframes is-spinning {
+  to {
+    transform: rotate(360deg);
+  }
+}

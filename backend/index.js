@@ -1,5 +1,6 @@
 const express = require("express")
 const cors = require("cors")
+const morgan = require("morgan")
 
 // Settings
 const app = express()
@@ -19,10 +20,14 @@ const Like = require("./src/models/Like")
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
+app.use(morgan("dev"))
 
 // Routes 
 const authRoutes = require("./src/routes/authRoutes")
 app.use("/", authRoutes)
+
+const userRoutes = require("./src/routes/userRoutes")
+app.use("/users", userRoutes)
 
 const thoughtRoutes = require("./src/routes/thoughtRoutes")
 app.use("/thoughts", thoughtRoutes)

@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
       const tokenStorage = localStorage.getItem("@auth:token")
       if (userStorage && tokenStorage) {
         setUser(JSON.parse(userStorage))
+        api.defaults.headers.common['auth-token'] = tokenStorage;
       }
     }
     loadDataStorage()
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const authenticate = ({ user, token }) => {
-    api.defaults.headers.common['Authorization'] = token;
+    api.defaults.headers.common['auth-token'] = token;
 
     setUser(user)
 

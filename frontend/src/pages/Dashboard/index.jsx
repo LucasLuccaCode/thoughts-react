@@ -1,8 +1,31 @@
+import { useContext, useEffect, useState } from "react"
 import { Form, Link } from "react-router-dom"
+import Loader from "../../components/Loader"
+import { AuthContext } from "../../contexts/auth"
+import { MessageContext } from "../../contexts/message"
+import { api } from "../../services/api"
 import "./styles.css"
 
 export default function Dashboard() {
-  const thoughts = []
+  const [thoughts, setThoughts] = useState([])
+  const [activeLoader, setActiveLoader] = useState(true)
+  const { user } = useContext(AuthContext)
+  const { setMessage } = useContext(MessageContext)
+
+  useEffect(() => {
+    const getThoughts = async () => {
+      try {
+        const { data } = await api.get(`/users/${user.id}`)
+
+        setThoughts(data.user.thoughts)
+      } catch ({ response }) {
+        setMessage({ error: response.data.error })
+      } finally {
+        setActiveLoader(false)
+      }
+    }
+    getThoughts()
+  }, [])
 
   return (
     <div className="c-dashboard page">
@@ -14,7 +37,7 @@ export default function Dashboard() {
       <h2>Seus pensamentos: </h2>
 
       {
-        thoughts.length ? (
+        !!thoughts.length && (
           <ul className="c-dashboard__thoughts">
             {
               thoughts.map(thought => (
@@ -32,9 +55,15 @@ export default function Dashboard() {
 
             }
           </ul>
-        ) : (
+        )
+      }
+      {
+        !thoughts.length && !activeLoader && (
           <p className="empty">Nenhum pensamento publicado, <Link to={`/thoughts/add`}>clique aqui</Link> para adicionar um.</p>
         )
+      }
+      {
+        activeLoader && <Loader />
       }
     </div>
   )
