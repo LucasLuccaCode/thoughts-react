@@ -1,3 +1,7 @@
+.c-messages {
+  z-index: 1001;
+}
+
 .c-messages p {
   font-weight: bold;
   font-size: .7rem;

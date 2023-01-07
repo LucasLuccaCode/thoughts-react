@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react"
 import { Form, Link } from "react-router-dom"
-import Loader from "../../components/Loader"
 import { AuthContext } from "../../contexts/auth"
 import { MessageContext } from "../../contexts/message"
 import { api } from "../../services/api"
+import Loader from "../../components/Loader"
+import Modal from "../../components/Modal"
+import CreateThought from "../../components/CreateThought"
 import "./styles.css"
 
 export default function Dashboard() {
+  const [statusModal, setStatusModal] = useState(false)
   const [thoughts, setThoughts] = useState([])
   const [activeLoader, setActiveLoader] = useState(true)
   const { user } = useContext(AuthContext)
@@ -31,10 +34,16 @@ export default function Dashboard() {
     <div className="c-dashboard page">
       <div className="c-dashboard__title">
         <h1>Dashboard</h1>
-        <Link className="btn" to={`/thoughts/add`}>Adicionar pensamento</Link>
+        <button className="btn" onClick={() => setStatusModal(true)}>Adicionar pensamento</button>
+        <Modal statusModal={statusModal} closeModal={() => setStatusModal(false)}>
+          <CreateThought 
+            setThoughts={setThoughts} 
+            closeModal={() => setStatusModal(false)} 
+          />
+        </Modal>
       </div>
 
-      <h2>Seus pensamentos: </h2>
+      <h2>Seus pensamentos: <span>{thoughts.length}</span></h2>
 
       {
         !!thoughts.length && (
@@ -59,7 +68,7 @@ export default function Dashboard() {
       }
       {
         !thoughts.length && !activeLoader && (
-          <p className="empty">Nenhum pensamento publicado, <Link to={`/thoughts/add`}>clique aqui</Link> para adicionar um.</p>
+          <p className="empty">Nenhum pensamento publicado, <Link onClick={() => setStatusModal(true)}>clique aqui</Link> para adicionar um.</p>
         )
       }
       {

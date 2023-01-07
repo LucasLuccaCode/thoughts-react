@@ -13,8 +13,9 @@ module.exports = class UserController {
         attributes: ['id', 'name', 'email'],
         include: {
           model: Thought,
-          as: "thoughts"
-        }
+          as: "thoughts",
+        },
+        order: [[{ model: Thought, as: "thoughts" }, 'id', "DESC"]]
       })
 
       res.status(200).json({

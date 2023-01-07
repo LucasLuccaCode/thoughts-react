@@ -24,6 +24,7 @@
   outline: 0;
   background: transparent;
   border-radius: .3rem;
+  font-size: .7rem;
   color: #cfcfdf;
   border: 2px solid var(--details-color);
   padding: .4rem .5rem;
@@ -33,7 +34,6 @@
 .c-form__input textarea:focus {
   background: var(--details-color);
   color: var(--secondary-color);
-  font-weight: bold;
 }
 
 .c-form__input textarea:focus::placeholder {

@@ -3,11 +3,14 @@ const Thought = require("../models/Thought")
 
 module.exports = class ThoughtController {
   static async create(req, res) {
-    const { content } = req.body
-    const userId = Number(req.body.userId)
-    const tokenUserId = req.user.id
-
     try {
+      const { content } = req.body
+      const userId = Number(req.body.userId)
+      const tokenUserId = req.user.id
+      console.log({ content, userId })
+
+      if (!content) return res.status(400).json({ error: "Escreva algo para publicar" })
+
       const userIdsMatch = tokenUserId === userId
       if (!userIdsMatch) return res.status(401).json({ error: "Acesso negado!" })
 
