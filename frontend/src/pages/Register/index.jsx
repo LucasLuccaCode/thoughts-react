@@ -17,7 +17,6 @@ export default function Register() {
       const data = Object.fromEntries(formData);
 
       const res = await api.post("/register", data)
-      console.log(res)
 
       setMessage({ success: res.data.message })
       return navigate("/login")

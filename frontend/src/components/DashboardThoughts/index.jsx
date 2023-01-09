@@ -1,32 +1,21 @@
 import { useContext, useEffect, useState } from "react"
 import { Form, Link } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth"
-import { MessageContext } from "../../contexts/message"
-import { api } from "../../services/api"
+import { ThoughtsContext } from "../../contexts/thoughts"
 import Loader from "../Loader"
 import "./styles.css"
 
 
 export default function DashboardThoughts() {
-  const [thoughts, setThoughts] = useState([])
+  const { thoughts, updateThoughts } = useContext(ThoughtsContext)
   const [activeLoader, setActiveLoader] = useState(true)
   const { user } = useContext(AuthContext)
-  const { setMessage } = useContext(MessageContext)
 
   useEffect(() => {
-    const getThoughts = async () => {
-      try {
-        const { data } = await api.get(`/users/${user.id}`)
-
-        setThoughts(data.user.thoughts)
-      } catch ({ response }) {
-        setMessage({ error: response.data.error })
-      } finally {
-        setActiveLoader(false)
-      }
-    }
-    getThoughts()
+    updateThoughts(user.id)
+      .finally(() => setActiveLoader(false))
   }, [])
+
 
   return (
     <div className="c-dashboard__thoughts">
@@ -59,7 +48,9 @@ export default function DashboardThoughts() {
         )
       }
       {
-        activeLoader && <Loader />
+        !thoughts.length && activeLoader && (
+          <Loader />
+        )
       }
     </div>
   )

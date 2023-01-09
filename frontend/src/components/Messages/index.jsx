@@ -1,18 +1,19 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { MessageContext } from "../../contexts/message"
 import "./styles.css"
 
 export default function Messages() {
   const { message, setMessage } = useContext(MessageContext)
+  const timer = useRef()
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    timer.current = setTimeout(() => {
       setMessage(null)
-      clearTimeout(timer)
+      clearTimeout(timer.current)
     }, 4000);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer.current);
     };
   }, [message])
 
