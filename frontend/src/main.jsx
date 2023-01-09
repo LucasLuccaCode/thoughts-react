@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import DashboardCreate from './pages/Dashboard/CreateThought'
 
 import { PrivateRoute } from "./routes/privateRoutes"
 import { AuthProvider } from './contexts/auth'
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
           {
             path: "/dashboard",
             element: <Dashboard />,
+            children: [
+              { 
+                path: "add",
+                element: <DashboardCreate />
+              }
+            ]
           }
         ]
       },
