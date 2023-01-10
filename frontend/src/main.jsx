@@ -12,6 +12,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import DashboardCreate from './pages/Dashboard/CreateThought'
+import DashboardEditThought from './pages/Dashboard/EditThought'
 
 import { PrivateRoute } from "./routes/privateRoutes"
 import { AuthProvider } from './contexts/auth'
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
               { 
                 path: "add",
                 element: <DashboardCreate />
+              },
+              { 
+                path: ":thoughtId/edit",
+                element: <DashboardEditThought />
               }
             ]
           }

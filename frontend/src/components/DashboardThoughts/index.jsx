@@ -48,7 +48,7 @@ export default function DashboardThoughts() {
                 <li key={thought.id}>
                   <h3>&#8220; {thought.content} &#8220;</h3>
                   <div className="c-dashboard__thoughts__actions">
-                    <Link className="btn" to={`/thoughts/${thought.id}/edit`}>Editar</Link>
+                    <Link className="btn" to={`${thought.id}/edit`}>Editar</Link>
                     <Form onSubmit={handleDeleteThought} method="DELETE">
                       <input type="hidden" name="thoughtId" value={thought.id} />
                       <input className="btn" type="submit" value="Deletar" />
