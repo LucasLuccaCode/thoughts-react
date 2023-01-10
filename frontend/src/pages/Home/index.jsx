@@ -6,9 +6,12 @@ import "./styles.css"
 export async function loader({ request }) {
   const url = new URL(request.url);
   const search = url.searchParams.get("search");
+  const queryParams = Object.fromEntries(url.searchParams)
 
   try {
-    const { data } = await api.get("/thoughts")
+    const { data } = await api.get("/thoughts", {
+      params: queryParams
+    })
 
     if (data.error) {
       throw new Response("", {

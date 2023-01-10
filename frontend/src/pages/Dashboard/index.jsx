@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom"
-import DashboardThoughts from "../../components/DashboardThoughts"
+import DashboardThoughts from "./DashboardThoughts"
 import { ThoughtsProvider } from "../../contexts/thoughts"
 import "./styles.css"
 

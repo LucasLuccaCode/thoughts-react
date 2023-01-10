@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { Form, Link } from "react-router-dom"
-import { AuthContext } from "../../contexts/auth"
-import { MessageContext } from "../../contexts/message"
-import { ThoughtsContext } from "../../contexts/thoughts"
-import { api } from "../../services/api"
-import Loader from "../Loader"
+import { AuthContext } from "../../../contexts/auth"
+import { MessageContext } from "../../../contexts/message"
+import { ThoughtsContext } from "../../../contexts/thoughts"
+import { api } from "../../../services/api"
+import Loader from "../../../components/Loader"
 import "./styles.css"
 
 

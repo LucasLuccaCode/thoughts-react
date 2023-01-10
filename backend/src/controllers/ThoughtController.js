@@ -1,4 +1,5 @@
 // Models
+const { Op } = require("sequelize")
 const Thought = require("../models/Thought")
 
 module.exports = class ThoughtController {
@@ -7,7 +8,6 @@ module.exports = class ThoughtController {
       const { content } = req.body
       const userId = Number(req.body.userId)
       const tokenUserId = req.user.id
-      console.log({ content, userId })
 
       if (!content) return res.status(400).json({ error: "Escreva algo para publicar" })
 
@@ -33,8 +33,18 @@ module.exports = class ThoughtController {
 
   static async getThoughts(req, res) {
     try {
+      const { search, order } = req.query
+      const query = `%${search || ""}%`
+      const orderBy = order === "new" ? "DESC" : "ASC"
+
       const thoughts = await Thought.findAll({
-        include: "author"
+        where: {
+          content: {
+            [Op.like]: query
+          }
+        },
+        include: "author",
+        order: [["createdAt", orderBy]]
       })
 
       res.status(200).json({
@@ -93,8 +103,8 @@ module.exports = class ThoughtController {
       const tokenUserId = req.user.id
 
       const status = await Thought.destroy({ where: { id: thoughtId, userId: tokenUserId } })
-      
-      if(!status) return res.status(400).json({ error: "Pensamento não encontrado" })
+
+      if (!status) return res.status(400).json({ error: "Pensamento não encontrado" })
 
       res.status(200).json({
         error: null,
