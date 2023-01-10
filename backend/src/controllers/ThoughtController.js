@@ -33,7 +33,9 @@ module.exports = class ThoughtController {
 
   static async getThoughts(req, res) {
     try {
-      const thoughts = await Thought.findAll()
+      const thoughts = await Thought.findAll({
+        include: "author"
+      })
 
       res.status(200).json({
         error: null,

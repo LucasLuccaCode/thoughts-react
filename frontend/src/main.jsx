@@ -16,7 +16,9 @@ import DashboardEditThought from './pages/Dashboard/EditThought'
 
 import { PrivateRoute } from "./routes/privateRoutes"
 import { AuthProvider } from './contexts/auth'
-import Home from './pages/Home'
+import Home, {
+  loader as homeLoader
+} from './pages/Home'
 
 const router = createBrowserRouter([
   {
@@ -26,7 +28,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
+        loader: homeLoader, 
+        errorElement: <NotFound />
       },
       {
         path: "/dashboard",

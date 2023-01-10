@@ -29,5 +29,9 @@ User.hasMany(Thought, {
   onDelete: "CASCADE",
   onUpdate: "CASCADE"
 })
+Thought.belongsTo(User, {
+  foreignKey: "userId",
+  as: "author"
+})
 
 module.exports = Thought
