@@ -16,6 +16,7 @@ import DashboardEditThought from './pages/Dashboard/EditThought'
 
 import { PrivateRoute } from "./routes/privateRoutes"
 import { AuthProvider } from './contexts/auth'
+import Home from './pages/Home'
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Pensamentos</h1>
+        element: <Home />
       },
       {
         path: "/dashboard",
