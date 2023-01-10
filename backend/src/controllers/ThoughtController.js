@@ -86,14 +86,21 @@ module.exports = class ThoughtController {
   }
 
   static async delete(req, res) {
-    const { thoughtId } = req.params
-    const tokenUserId = req.user.id
+    try {
+      const { thoughtId } = req.params
+      const tokenUserId = req.user.id
 
-    await Thought.destroy({ where: { id: thoughtId, userId: tokenUserId } })
+      const status = await Thought.destroy({ where: { id: thoughtId, userId: tokenUserId } })
+      
+      if(!status) return res.status(400).json({ error: "Pensamento não encontrado" })
 
-    res.status(200).json({
-      error: null,
-      message: "Pensamento deletado com sucesso"
-    })
+      res.status(200).json({
+        error: null,
+        message: "Pensamento deletado com sucesso"
+      })
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ error })
+    }
   }
 }

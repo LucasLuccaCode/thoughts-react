@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react"
 import { Form, Link } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth"
+import { MessageContext } from "../../contexts/message"
 import { ThoughtsContext } from "../../contexts/thoughts"
+import { api } from "../../services/api"
 import Loader from "../Loader"
 import "./styles.css"
 
@@ -10,12 +12,29 @@ export default function DashboardThoughts() {
   const { thoughts, updateThoughts } = useContext(ThoughtsContext)
   const [activeLoader, setActiveLoader] = useState(true)
   const { user } = useContext(AuthContext)
+  const { setMessage } = useContext(MessageContext)
 
   useEffect(() => {
     updateThoughts(user.id)
       .finally(() => setActiveLoader(false))
   }, [])
 
+  const handleDeleteThought = async (e) => {
+    e.preventDefault()
+    setMessage()
+
+    try {
+      const formData = new FormData(e.target);
+      const { thoughtId } = Object.fromEntries(formData);
+
+      const { data } = await api.delete(`/thoughts/${thoughtId}`)
+
+      await updateThoughts(user.id)
+      setMessage({ success: data.message })
+    } catch ({ response }) {
+      setMessage({ error: response.data.error })
+    }
+  }
 
   return (
     <div className="c-dashboard__thoughts">
@@ -30,7 +49,7 @@ export default function DashboardThoughts() {
                   <h3>&#8220; {thought.content} &#8220;</h3>
                   <div className="c-dashboard__thoughts__actions">
                     <Link className="btn" to={`/thoughts/${thought.id}/edit`}>Editar</Link>
-                    <Form action={`/thoughts/${thought.id}`} method="DELETE">
+                    <Form onSubmit={handleDeleteThought} method="DELETE">
                       <input type="hidden" name="thoughtId" value={thought.id} />
                       <input className="btn" type="submit" value="Deletar" />
                     </Form>
