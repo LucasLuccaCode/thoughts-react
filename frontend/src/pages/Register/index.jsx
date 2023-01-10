@@ -1,12 +1,11 @@
-import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import UserForm from "../../components/UserForm"
-import { MessageContext } from "../../contexts/message"
+import { useMessage } from "../../contexts/message"
 import { api } from "../../services/api"
+import UserForm from "../../components/UserForm"
 
 export default function Register() {
   const navigate = useNavigate()
-  const { setMessage } = useContext(MessageContext)
+  const { setMessage } = useMessage()
 
   const handleSignUp = async (e) => {
     e.preventDefault()

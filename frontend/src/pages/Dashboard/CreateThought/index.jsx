@@ -1,15 +1,14 @@
-import { MessageContext } from "../../../contexts/message"
 import { useNavigate } from "react-router-dom"
-import { useContext } from "react"
+import { useMessage } from "../../../contexts/message"
+import { useThoughts } from "../../../contexts/thoughts"
 import { api } from "../../../services/api"
 import ThoughtForm from "../../../components/ThoughtForm"
 import Modal from "../../../components/Modal"
-import { ThoughtsContext } from "../../../contexts/thoughts"
 
 export default function CreateThought() {
+  const { setMessage } = useMessage()
+  const { setThoughts } = useThoughts()
   const navigate = useNavigate()
-  const { setMessage } = useContext(MessageContext)
-  const { setThoughts } = useContext(ThoughtsContext)
 
   const handleCreateThought = async (e) => {
     e.preventDefault()

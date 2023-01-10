@@ -1,14 +1,13 @@
-import { useContext } from "react"
 import { Navigate } from "react-router-dom"
-import { AuthContext } from "../../contexts/auth"
-import { MessageContext } from "../../contexts/message"
+import { useAuth } from "../../contexts/auth"
+import { useMessage } from "../../contexts/message"
 import { api } from "../../services/api"
 
 import UserForm from "../../components/UserForm"
 
 export default function Login() {
-  const { setMessage } = useContext(MessageContext)
-  const { authenticate, authenticated } = useContext(AuthContext)
+  const { setMessage } = useMessage()
+  const { authenticate, authenticated } = useAuth()
 
   const handleSigIn = async (e) => {
     e.preventDefault()
@@ -20,14 +19,15 @@ export default function Login() {
 
       const res = await api.post("/login", data)
       authenticate(res.data)
-      
+
       setMessage({ success: res.data.message })
-    } catch ({ response}) {
+    } catch ({ response }) {
       setMessage({ error: response.data.error })
     }
   }
 
-  if(authenticated) return <Navigate to={`/dashboard`} />
+  if (authenticated)
+    return <Navigate to={`/dashboard`} />
 
   return (
     <div className="c-auth page max-width">

@@ -1,9 +1,9 @@
-import { useContext, useEffect, useRef } from "react"
-import { MessageContext } from "../../contexts/message"
+import { useEffect, useRef } from "react"
+import { useMessage } from "../../contexts/message"
 import "./styles.css"
 
 export default function Messages() {
-  const { message, setMessage } = useContext(MessageContext)
+  const { message, setMessage } = useMessage()
   const timer = useRef()
 
   useEffect(() => {

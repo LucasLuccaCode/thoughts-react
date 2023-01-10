@@ -1,13 +1,13 @@
 import { createContext, useContext, useState } from "react"
 import { api } from "../services/api"
-import { MessageContext } from "./message"
+import { useMessage } from "./message"
 
 export const ThoughtsContext = createContext()
 
 
 export function ThoughtsProvider({ children }) {
   const [thoughts, setThoughts] = useState([])
-  const { setMessage } = useContext(MessageContext)
+  const { setMessage } = useMessage()
 
   const updateThoughts = async (userId) => {
     try {
@@ -26,4 +26,8 @@ export function ThoughtsProvider({ children }) {
       {children}
     </ThoughtsContext.Provider>
   )
+}
+
+export function useThoughts() {
+  return useContext(ThoughtsContext)
 }

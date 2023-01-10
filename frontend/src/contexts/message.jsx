@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 export const MessageContext = createContext()
 
@@ -10,4 +10,8 @@ export function MessageProvider({ children }) {
       {children}
     </MessageContext.Provider>
   )
+}
+
+export function useMessage(){
+  return useContext(MessageContext)
 }

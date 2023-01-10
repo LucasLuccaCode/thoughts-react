@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { Form } from "react-router-dom";
-import { AuthContext } from "../../contexts/auth";
+import { useAuth } from "../../contexts/auth";
 
 export default function ThoughtForm({ thought, btnText, handleForm }) {
-  const { user } = useContext(AuthContext)
+  const { user } = useAuth()
 
   return (
     <Form method="POST" onSubmit={handleForm} className="c-form max-width">
