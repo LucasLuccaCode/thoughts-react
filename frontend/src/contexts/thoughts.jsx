@@ -9,7 +9,7 @@ export function ThoughtsProvider({ children }) {
   const [thoughts, setThoughts] = useState([])
   const { setMessage } = useMessage()
 
-  const updateThoughts = async (userId) => {
+  const updateThoughtsByUserId = async (userId) => {
     try {
       const { data } = await api.get(`/users/${userId}`)
 
@@ -19,7 +19,7 @@ export function ThoughtsProvider({ children }) {
     }
   }
 
-  const value = { thoughts, setThoughts, updateThoughts }
+  const value = { thoughts, setThoughts, updateThoughtsByUserId }
 
   return (
     <ThoughtsContext.Provider value={value}>

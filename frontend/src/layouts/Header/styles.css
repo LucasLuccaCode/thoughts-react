@@ -59,4 +59,5 @@ header li button:hover {
 header li button {
   cursor: pointer;
   background: transparent;
+  text-transform: capitalize;
 }

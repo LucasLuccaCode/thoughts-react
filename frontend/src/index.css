@@ -107,6 +107,11 @@ button {
   color: var(--details-color);
 }
 
+.more-thoughts {
+  display: block;
+  margin: 1rem auto;
+}
+
 .empty {
   font-size: .8rem;
   margin-top: 1rem;

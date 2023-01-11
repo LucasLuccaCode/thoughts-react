@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom"
-import DashboardThoughts from "./DashboardThoughts"
 import { ThoughtsProvider } from "../../contexts/thoughts"
+import DashboardThoughts from "./DashboardThoughts"
 import "./styles.css"
 
 export default function Dashboard() {

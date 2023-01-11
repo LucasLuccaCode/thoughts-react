@@ -9,16 +9,26 @@ import "./styles.css"
 
 
 export default function DashboardThoughts() {
-  const { thoughts, updateThoughts } = useThoughts()
+  const { thoughts, updateThoughtsByUserId } = useThoughts()
   const [activeLoader, setActiveLoader] = useState(true)
   const { user } = useAuth()
   const { setMessage } = useMessage()
+  const [currentPage, setCurrentPage] = useState(10)
 
   useEffect(() => {
-    updateThoughts(user.id)
-      .finally(() => setActiveLoader(false))
+    updateThoughtsByUserId(user.id)
+      .finally(() => {
+        setActiveLoader(false)
+      })
   }, [])
 
+  const nextPage = () => {
+    const perPage = 10
+    const nextPage = currentPage + perPage
+    const newCurrentPage = Math.min(nextPage, thoughts.length)
+    setCurrentPage(newCurrentPage)
+  }
+  
   const handleDeleteThought = async (e) => {
     e.preventDefault()
     setMessage()
@@ -42,23 +52,30 @@ export default function DashboardThoughts() {
 
       {
         !!thoughts.length && (
-          <ul className="c-dashboard__thoughts">
-            {
-              thoughts.map(thought => (
-                <li key={thought.id}>
-                  <h3>&#8220; {thought.content} &#8220;</h3>
-                  <div className="c-dashboard__thoughts__actions">
-                    <Link className="btn" to={`${thought.id}/edit`}>Editar</Link>
-                    <Form onSubmit={handleDeleteThought} method="DELETE">
-                      <input type="hidden" name="thoughtId" value={thought.id} />
-                      <input className="btn" type="submit" value="Deletar" />
-                    </Form>
-                  </div>
-                </li>
-              ))
+          <>
+            <ul className="c-dashboard__thoughts">
+              {
+                thoughts?.slice(0, currentPage).map(thought => (
+                  <li key={thought.id}>
+                    <h3>&#8220; {thought.content} &#8220;</h3>
+                    <div className="c-dashboard__thoughts__actions">
+                      <Link className="btn" to={`${thought.id}/edit`}>Editar</Link>
+                      <Form onSubmit={handleDeleteThought} method="DELETE">
+                        <input type="hidden" name="thoughtId" value={thought.id} />
+                        <input className="btn" type="submit" value="Deletar" />
+                      </Form>
+                    </div>
+                  </li>
+                ))
 
+              }
+            </ul>
+            {
+              currentPage < thoughts.length && (
+                <button className="btn more-thoughts" onClick={nextPage}>Mostrar mais</button>
+              )
             }
-          </ul>
+          </>
         )
       }
       {

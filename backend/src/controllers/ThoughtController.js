@@ -35,7 +35,7 @@ module.exports = class ThoughtController {
     try {
       const { search, order } = req.query
       const query = `%${search || ""}%`
-      const orderBy = order === "new" ? "DESC" : "ASC"
+      const orderBy = order === "old" ? "ASC" : "DESC"
 
       const thoughts = await Thought.findAll({
         where: {

@@ -16,6 +16,7 @@ import DashboardEditThought from './pages/Dashboard/EditThought'
 
 import { PrivateRoute } from "./routes/privateRoutes"
 import { AuthProvider } from './contexts/auth'
+
 import Home, {
   loader as homeLoader
 } from './pages/Home'
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: homeLoader, 
+        loader: homeLoader,
         errorElement: <NotFound />
       },
       {
@@ -40,11 +41,11 @@ const router = createBrowserRouter([
             path: "/dashboard",
             element: <Dashboard />,
             children: [
-              { 
+              {
                 path: "add",
                 element: <DashboardCreate />
               },
-              { 
+              {
                 path: ":thoughtId/edit",
                 element: <DashboardEditThought />
               }
