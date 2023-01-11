@@ -43,7 +43,16 @@ module.exports = class ThoughtController {
             [Op.like]: query
           }
         },
-        include: "author",
+        include: [
+          {
+            association: "author",
+            attributes: ['name']
+          },
+          {
+            association: "likes",
+            attributes: ['userId']
+          }
+        ],
         order: [["createdAt", orderBy]]
       })
 

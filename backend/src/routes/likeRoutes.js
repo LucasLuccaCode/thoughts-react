@@ -7,7 +7,7 @@ const verifyToken = require("../middlewares/checkTokenMiddleware")
 // Controller
 const LikeController = require("../controllers/LikeController")
 
-router.route("/:thoughtId/all")
+router.route("/:thoughtId/likes")
   .get(verifyToken, LikeController.getAll)
 
 router.route("/:thoughtId/like")

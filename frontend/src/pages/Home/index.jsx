@@ -3,6 +3,7 @@ import { api } from "../../services/api";
 import HomeTitle from "./HomeTItle";
 import Thoughts from "./Thoughts";
 import "./styles.css"
+import { useEffect, useState } from "react";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -30,13 +31,18 @@ export async function loader({ request }) {
 
 
 export default function Home() {
-  const { search, thoughts } = useLoaderData()
+  const { search, thoughts: data } = useLoaderData()
+  const [thoughts, setThoughts] = useState(data)
+
+  useEffect(()=>{
+    setThoughts(data)
+  }, [data])
 
   return (
     <div className="c-home__thoughts">
       <HomeTitle search={search} />
 
-      <Thoughts thoughts={thoughts} />
+      <Thoughts thoughts={thoughts} setThoughts={setThoughts} />
     </div>
   )
 }

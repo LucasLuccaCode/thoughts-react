@@ -1,0 +1,68 @@
+.c-home__thoughts__post {
+  border-radius: .3rem;
+  box-shadow: 0px 1px 1px 2px rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .05);
+}
+
+.c-home__thoughts__post h2 {
+  padding: .8rem .8rem 0rem;
+  font-size: .9rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.c-home__thoughts__post h3 {
+  /* text-align: center; */
+  padding: .8rem;
+  font-size: .6rem;
+}
+
+
+.c-home__thoughts__post h3 span {
+  color: var(--details-color);
+  text-transform: capitalize;
+}
+
+/* POSTS ACTIONS */
+.c-home__thoughts__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* gap: 1rem; */
+  padding: .2rem .8rem;
+  border-top: 2px solid rgba(255, 255, 255, .05);
+}
+
+.c-home__thoughts__actions li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  transition: .3s ease;
+}
+
+.c-home__thoughts__actions li:hover {
+  background: rgba(255, 255, 255, .05);
+}
+
+.c-home__thoughts__actions li button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  font-size: .7rem;
+  color: #cacad0;
+  padding: .2rem .6rem;
+  background: transparent;
+  transition: .3s ease;
+}
+
+.c-home__thoughts__actions li:hover button {
+  color: var(--details-color);
+}
+
+.like i.bi-heart-fill,
+.like i.bi-heart-fill ~ span {
+  color: var(--details-color);
+}

@@ -45,7 +45,7 @@ module.exports = class LikeController {
         await like.destroy()
       }
 
-      res.status(200).json({ like, stausLike: created })
+      res.status(200).json({ like, statusLike: created })
     } catch (error) {
       res.status(500).json({ error })
     }

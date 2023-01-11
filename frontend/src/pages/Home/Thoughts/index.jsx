@@ -1,8 +1,10 @@
 import { useState } from "react"
-import { Link, useNavigation } from "react-router-dom"
+import { useNavigation } from "react-router-dom"
 import Loader from "../../../components/Loader"
+import Thought from "./Thought"
+import "./styles.css"
 
-export default function Thoughts({ thoughts }) {
+export default function Thoughts({ thoughts, setThoughts }) {
   const [currentPage, setCurrentPage] = useState(10)
   const navigation = useNavigation()
 
@@ -21,30 +23,7 @@ export default function Thoughts({ thoughts }) {
             <ul className="c-home__thoughts__posts max-width">
               {
                 thoughts?.slice(0, currentPage).map(thought => (
-                  <li key={thought.id}>
-                    <h2>&#8220;{thought.content}&#8221;</h2>
-                    <h3>by <span>{thought?.author?.name}</span></h3>
-                    <ul className="c-home__thoughts__actions">
-                      <li className="like">
-                        <Link to={`/thoughts/${thought.id}/like`}>
-                          <i className="bi bi-heart"></i>
-                          <span>0</span>
-                        </Link>
-                      </li>
-                      <li className="comments">
-                        <Link to={`/thoughts/${thought.id}/comments`}>
-                          <i className="bi bi-chat-dots"></i>
-                          <span>0</span>
-                        </Link>
-                      </li>
-                      <li className="favorite">
-                        <Link to={`/thoughts/${thought.id}/favorite`}>
-                          <i className="bi bi-star"></i>
-                          <span>0</span>
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
+                  <Thought thought={thought} setThoughts={setThoughts} key={thought.id} />
                 ))
               }
             </ul>
