@@ -10,7 +10,7 @@ export default function EditThought() {
   const navigate = useNavigate()
   const [thought, setThought] = useState("")
   const { setMessage } = useMessage()
-  const { updateThoughts } = useThoughts()
+  const { updateThoughtsByUserId } = useThoughts()
   const { thoughtId } = useParams()
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function EditThought() {
       const { data: res } = await api.put(`/thoughts/${data.thoughtId}`, data)
 
       setMessage({ success: res.message })
-      await updateThoughts(data.userId)
+      await updateThoughtsByUserId(data.userId)
       return navigate(-1)
     } catch ({ response }) {
       setMessage({ error: response.data.error })

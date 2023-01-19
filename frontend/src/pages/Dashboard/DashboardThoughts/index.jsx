@@ -39,7 +39,7 @@ export default function DashboardThoughts() {
 
       const { data } = await api.delete(`/thoughts/${thoughtId}`)
 
-      await updateThoughts(user.id)
+      await updateThoughtsByUserId(user.id)
       setMessage({ success: data.message })
     } catch ({ response }) {
       setMessage({ error: response.data.error })
