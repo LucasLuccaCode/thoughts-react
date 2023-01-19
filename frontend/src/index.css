@@ -124,6 +124,18 @@ button {
   color: var(--details-color);
 }
 
+.error {
+  color: #ffefef;
+  border-radius: .2rem;
+  margin: 1rem auto;
+  text-align: center;
+  font-size: .7rem;
+  width: max-content;
+  padding: .3rem .5rem;
+  font-weight: bold;
+  background: #ff3030;
+}
+
 .page h1 {
   text-align: left;
   padding-left: .5rem;

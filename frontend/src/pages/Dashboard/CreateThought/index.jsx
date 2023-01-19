@@ -1,30 +1,40 @@
+import { useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import { useMessage } from "../../../contexts/message"
-import { useThoughts } from "../../../contexts/thoughts"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+
 import { api } from "../../../services/api"
 import ThoughtForm from "../../../components/ThoughtForm"
 import Modal from "../../../components/Modal"
 
 export default function CreateThought() {
   const { setMessage } = useMessage()
-  const { setThoughts } = useThoughts()
   const navigate = useNavigate()
 
-  const handleCreateThought = async (e) => {
+  const queryClient = useQueryClient()
+
+  const { mutate, isLoading } = useMutation(
+    ({ data }) => api.post("/thoughts", data),
+    {
+      onSuccess: (data) => {
+        setMessage({ success: data.data.message })
+        queryClient.invalidateQueries('dashboard-thoughts')
+        navigate(-1)
+      },
+      onError: (error) => {
+        console.log(error)
+        setMessage({ error: error.message })
+      }
+    }
+  )
+
+  const handleCreateThought = useCallback(async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData)
 
-    try {
-      const { data: res } = await api.post("/thoughts", data)
-
-      setMessage({ success: res.message })
-      setThoughts(prevThoughts => [res.thought, ...prevThoughts])
-      return navigate(-1)
-    } catch ({ response }) {
-      setMessage({ error: response.data.error })
-    }
-  }
+    mutate({ data })
+  }, [])
 
   return (
     <Modal>

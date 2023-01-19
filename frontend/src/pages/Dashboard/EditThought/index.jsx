@@ -1,42 +1,53 @@
 import { useMessage } from "../../../contexts/message"
 import { useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useThoughts } from "../../../contexts/thoughts"
 import { api } from "../../../services/api"
+
 import ThoughtForm from "../../../components/ThoughtForm"
 import Modal from "../../../components/Modal"
 
 export default function EditThought() {
   const navigate = useNavigate()
-  const [thought, setThought] = useState("")
   const { setMessage } = useMessage()
-  const { updateThoughtsByUserId } = useThoughts()
   const { thoughtId } = useParams()
+  const queryClient = useQueryClient()
 
-  useEffect(() => {
-    const getThought = async () => {
-      const { data } = await api.get(`/thoughts/${thoughtId}`)
-      setThought(data.thought)
+  const { data, isLoadingError, error } = useQuery(
+    [`thought-${thoughtId}`],
+    () => api.get(`/thoughts/${thoughtId}`),
+    {
+      staleTime: Infinity,
+      retry: false
     }
-    getThought()
-  }, [])
+  )
 
+  const { mutate, isLoading } = useMutation(
+    ({ thoughtId, data }) => api.put(`/thoughts/${thoughtId}`, data),
+    {
+      onSuccess: (data) => {
+        setMessage({ success: data.data.message })
+        queryClient.invalidateQueries('dashboard-thoughts')
+        navigate(-1)
+      },
+      onError: (error) => {
+        console.log(error)
+        setMessage({ error: error.message })
+      }
+    }
+  )
 
-  const handleEditThought = async (e) => {
+  const thought = data?.data?.thought
+
+  const handleEditThought = useCallback(async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData)
 
-    try {
-      const { data: res } = await api.put(`/thoughts/${data.thoughtId}`, data)
-
-      setMessage({ success: res.message })
-      await updateThoughtsByUserId(data.userId)
-      return navigate(-1)
-    } catch ({ response }) {
-      setMessage({ error: response.data.error })
-    }
-  }
+    mutate({ thoughtId: thought.id, data })
+  }, [thought])
 
   return (
     <Modal>
@@ -47,6 +58,7 @@ export default function EditThought() {
           thought={thought}
           btnText="Atualizar"
           handleForm={handleEditThought}
+          isLoading={isLoading}
         />
       </div>
     </Modal>

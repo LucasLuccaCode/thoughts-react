@@ -1,49 +1,40 @@
-import { useEffect, useState } from "react"
-import { Form, Link } from "react-router-dom"
-import { useAuth } from "../../../contexts/auth"
-import { useMessage } from "../../../contexts/message"
-import { useThoughts } from "../../../contexts/thoughts"
-import { api } from "../../../services/api"
-import Loader from "../../../components/Loader"
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import "./styles.css"
 
+import { useThoughts } from "../../../contexts/thoughts"
+import { useMessage } from "../../../contexts/message"
+import { api } from "../../../services/api"
+
+import Loader from "../../../components/Loader"
 
 export default function DashboardThoughts() {
-  const { thoughts, updateThoughtsByUserId } = useThoughts()
-  const [activeLoader, setActiveLoader] = useState(true)
-  const { user } = useAuth()
-  const { setMessage } = useMessage()
   const [currentPage, setCurrentPage] = useState(10)
+  const { thoughts } = useThoughts()
+  const { setMessage } = useMessage()
 
-  useEffect(() => {
-    updateThoughtsByUserId(user.id)
-      .finally(() => {
-        setActiveLoader(false)
-      })
-  }, [])
+  const queryClient = useQueryClient()
+
+  const { mutate, isLoading } = useMutation(
+    (thoughtId) => api.delete(`/thoughts/${thoughtId}`),
+    {
+      onSuccess: (data, variables, context) => {
+        setMessage({ success: data.data.message })
+        queryClient.invalidateQueries('dashboard-thoughts')
+      },
+      onError: (error) => {
+        console.log(error)
+        setMessage({ error: error.message })
+      }
+    }
+  )
 
   const nextPage = () => {
     const perPage = 10
     const nextPage = currentPage + perPage
     const newCurrentPage = Math.min(nextPage, thoughts.length)
     setCurrentPage(newCurrentPage)
-  }
-  
-  const handleDeleteThought = async (e) => {
-    e.preventDefault()
-    setMessage()
-
-    try {
-      const formData = new FormData(e.target);
-      const { thoughtId } = Object.fromEntries(formData);
-
-      const { data } = await api.delete(`/thoughts/${thoughtId}`)
-
-      await updateThoughtsByUserId(user.id)
-      setMessage({ success: data.message })
-    } catch ({ response }) {
-      setMessage({ error: response.data.error })
-    }
   }
 
   return (
@@ -60,10 +51,10 @@ export default function DashboardThoughts() {
                     <h3>&#8220; {thought.content} &#8220;</h3>
                     <div className="c-dashboard__thoughts__actions">
                       <Link className="btn" to={`${thought.id}/edit`}>Editar</Link>
-                      <Form onSubmit={handleDeleteThought} method="DELETE">
-                        <input type="hidden" name="thoughtId" value={thought.id} />
-                        <input className="btn" type="submit" value="Deletar" />
-                      </Form>
+
+                      <button className="btn" onClick={() => mutate(thought.id)}>
+                        Deletar
+                      </button>
                     </div>
                   </li>
                 ))
@@ -79,15 +70,15 @@ export default function DashboardThoughts() {
         )
       }
       {
-        !thoughts.length && !activeLoader && (
+        !thoughts.length && !isLoading && (
           <p className="empty">Nenhum pensamento publicado, <Link to={`add`}>clique aqui</Link> para adicionar um.</p>
         )
       }
       {
-        !thoughts.length && activeLoader && (
+        !thoughts.length && isLoading && (
           <Loader />
         )
       }
-    </div>
+    </div >
   )
 }

@@ -1,25 +1,29 @@
-import { createContext, useContext, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
+import { createContext, useContext } from "react"
+import Loader from "../components/Loader"
 import { api } from "../services/api"
+import { useAuth } from "./auth"
 import { useMessage } from "./message"
 
 export const ThoughtsContext = createContext()
 
 
 export function ThoughtsProvider({ children }) {
-  const [thoughts, setThoughts] = useState([])
-  const { setMessage } = useMessage()
+  const { user } = useAuth()
+  // const { setMessage } = useMessage()
 
-  const updateThoughtsByUserId = async (userId) => {
-    try {
-      const { data } = await api.get(`/users/${userId}`)
+  const { data, isLoading } = useQuery(['dashboard-thoughts'], () => api.get(`/users/${user?.id}`), {
+    staleTime: Infinity
+  })
 
-      setThoughts(data.user.thoughts)
-    } catch ({ response }) {
-      setMessage({ error: response.data.error })
-    }
+  if (isLoading) {
+    return <Loader />
   }
-
-  const value = { thoughts, setThoughts, updateThoughtsByUserId }
+  
+  const value = {
+    thoughts: data?.data.user.thoughts || [],
+    isLoading
+  }
 
   return (
     <ThoughtsContext.Provider value={value}>

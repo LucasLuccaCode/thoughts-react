@@ -23,7 +23,7 @@ module.exports = class ThoughtController {
 
       res.status(200).json({
         error: null,
-        message: "Pensamento postado",
+        message: "Pensamento publicado",
         thought: createdThought
       })
     } catch (error) {
