@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { useNavigation } from "react-router-dom"
-import Loader from "../../../components/Loader"
-import Thought from "./Thought"
 import "./styles.css"
 
-export default function Thoughts({ thoughts, setThoughts }) {
+import Loader from "../../../components/Loader"
+import Thought from "./Thought"
+
+export default function Thoughts({ thoughts, isLoading }) {
   const [currentPage, setCurrentPage] = useState(10)
   const navigation = useNavigation()
 
@@ -15,15 +16,19 @@ export default function Thoughts({ thoughts, setThoughts }) {
     setCurrentPage(newCurrentPage)
   }
 
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
-    <>
+    <div className="c-home__thoughts">
       {
-        thoughts?.length && navigation.state !== "loading" ? (
+        thoughts?.length ? (
           <>
             <ul className="c-home__thoughts__posts max-width">
               {
                 thoughts?.slice(0, currentPage).map(thought => (
-                  <Thought thought={thought} setThoughts={setThoughts} key={thought.id} />
+                  <Thought thought={thought} key={thought.id} />
                 ))
               }
             </ul>
@@ -34,15 +39,9 @@ export default function Thoughts({ thoughts, setThoughts }) {
             }
           </>
         ) : (
-          <Loader />
-        )
-      }
-
-      {
-        !thoughts?.length && (
           <p className="empty">Nenhum pensamento publicado ainda...</p>
         )
       }
-    </>
+    </div>
   )
 }

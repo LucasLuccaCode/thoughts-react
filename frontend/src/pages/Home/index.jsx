@@ -1,9 +1,9 @@
-import { useLoaderData } from "react-router-dom"
 import { api } from "../../services/api";
+import "./styles.css"
+
 import HomeTitle from "./HomeTItle";
 import Thoughts from "./Thoughts";
-import "./styles.css"
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -31,18 +31,24 @@ export async function loader({ request }) {
 
 
 export default function Home() {
-  const { search, thoughts: data } = useLoaderData()
-  const [thoughts, setThoughts] = useState(data)
 
-  useEffect(()=>{
-    setThoughts(data)
-  }, [data])
+  const {
+    data,
+    isLoading,
+    isLoadingError,
+    error
+  } = useQuery(['home-thoughts'], () => api.get('/thoughts'), {
+    staleTime: Infinity,
+    retry: false,
+    retryDelay: 2000
+  })
+
+  const thoughts = data?.data.thoughts
 
   return (
     <div className="c-home__thoughts">
-      <HomeTitle search={search} />
-
-      <Thoughts thoughts={thoughts} setThoughts={setThoughts} />
+      <HomeTitle search={''} />
+      <Thoughts thoughts={thoughts} isLoading={isLoading} />
     </div>
   )
 }
