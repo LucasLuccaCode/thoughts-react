@@ -11,7 +11,7 @@ export default function ThoughtCard({ thought, deleteThought }) {
 
   return (
     <li key={thought.id}>
-      <h3>&#8220; {thought.content} &#8220;</h3>
+      <h3>&#8220;{thought.content}&#8220;</h3>
       <div className="c-dashboard__thoughts__actions">
         <Link className="btn" to={`${thought.id}/edit`}>Editar</Link>
 

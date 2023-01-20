@@ -8,7 +8,7 @@ import Login from '../pages/Login'
 import Dashboard from '../pages/Dashboard'
 import DashboardCreate from '../pages/Dashboard/CreateThought'
 import DashboardEditThought from '../pages/Dashboard/EditThought'
-import Home, { loader as homeLoader } from '../pages/Home'
+import Home from '../pages/Home'
 
 import { PrivateRoute } from "./privateRoutes"
 
@@ -20,8 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
-        loader: homeLoader
+        element: <Home />
       },
       {
         path: "/dashboard",

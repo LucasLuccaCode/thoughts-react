@@ -15,7 +15,7 @@ module.exports = class ThoughtController {
       if (!userIdsMatch) return res.status(401).json({ error: "Acesso negado!" })
 
       const thought = {
-        content,
+        content: content.trim(),
         userId
       }
 
@@ -94,7 +94,7 @@ module.exports = class ThoughtController {
       const thought = await Thought.findOne({ where: { id: thoughtId, userId } })
       if (!thought) return res.status(400).json({ error: "Pensamento não encontrado" })
 
-      const updatedThought = await thought.update({ content })
+      const updatedThought = await thought.update({ content: content.trim() })
 
       res.status(200).json({
         error: null,

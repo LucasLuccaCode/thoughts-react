@@ -3,7 +3,6 @@ import "./styles.css"
 
 import HomeTitle from "./HomeTItle";
 import Thoughts from "./Thoughts";
-import { useQuery } from "@tanstack/react-query";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -31,24 +30,10 @@ export async function loader({ request }) {
 
 
 export default function Home() {
-
-  const {
-    data,
-    isLoading,
-    isLoadingError,
-    error
-  } = useQuery(['home-thoughts'], () => api.get('/thoughts'), {
-    staleTime: Infinity,
-    retry: false,
-    retryDelay: 2000
-  })
-
-  const thoughts = data?.data.thoughts
-
   return (
     <div className="c-home__thoughts">
       <HomeTitle search={''} />
-      <Thoughts thoughts={thoughts} isLoading={isLoading} />
+      <Thoughts />
     </div>
   )
 }
