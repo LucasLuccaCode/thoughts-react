@@ -15,7 +15,7 @@ export default function EditThought() {
 
   const queryClient = useQueryClient()
 
-  const { data, error } = useQuery(
+  const { data } = useQuery(
     [`thought-${thoughtId}`],
     () => api.get(`/thoughts/${thoughtId}`),
     {
@@ -33,8 +33,7 @@ export default function EditThought() {
         navigate(-1)
       },
       onError: (error) => {
-        console.log(error)
-        setMessage({ error: error.message })
+        setMessage({ error: error?.response?.data?.error || error.message })
       }
     }
   )
@@ -49,11 +48,6 @@ export default function EditThought() {
 
     mutate({ thoughtId, data })
   }, [thought])
-
-  if (error) {
-    setMessage({ error: error.message || 'Erro desconhecido' })
-    return
-  }
 
   return (
     <Modal>

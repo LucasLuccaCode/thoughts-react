@@ -14,7 +14,7 @@ header nav {
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  padding-left: var(--margin-h);
+  padding: 0 var(--margin-h);
 }
 
 header nav #logo {
@@ -38,26 +38,38 @@ header nav #logo img {
 header ul {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 header li a,
 header li button {
+  cursor: pointer;
   display: flex;
+  align-items: center;
   padding: .7rem var(--margin-h);
   font-size: .75rem;
   font-family: sans-serif;
   color: #aaaab0;
   transition: .3s ease;
+  background: transparent;
+  height: auto;
 }
 
 header li a:hover,
 header li button:hover {
-  background: rgba(255, 255, 255, .05);
-  color: var(--details-color);
+  color: #fff;
+  background: #4a4a50;
 }
 
 header li button {
-  cursor: pointer;
-  background: transparent;
-  text-transform: capitalize;
+  padding: .3rem;
+  border-radius: 50px;
+  margin-left: .5rem;
+}
+
+header li img {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: .3rem;
+  border-radius: 50px;
 }

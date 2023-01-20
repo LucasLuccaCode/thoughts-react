@@ -9,6 +9,10 @@ export default function Header() {
     logout()
   }
 
+  const avatarUrl = user?.avatar
+    ? user.avatar
+    : 'https://montinkantigo.s3.amazonaws.com/data/camisas/pain---naruto-5bd112380051b-estampa-306.png'
+
   return (
     <header>
       <nav>
@@ -27,8 +31,11 @@ export default function Header() {
                 <li>
                   <Link to={`/dashboard`}>Dashboard</Link>
                 </li>
-                <li>
-                  <button onClick={handleLogout}>{user.name}</button>
+                <li title="Sair">
+                  <button onClick={handleLogout}>
+                    <img src={avatarUrl} alt={`Foto de perfil do ${user.name}`} />
+                    {user.name}
+                  </button>
                 </li>
               </>
             ) : (

@@ -16,14 +16,14 @@ export default function CreateThought() {
   const { mutate, isLoading } = useMutation(
     ({ data }) => api.post("/thoughts", data),
     {
+      retry: false,
       onSuccess: (data) => {
         setMessage({ success: data.data.message })
         queryClient.invalidateQueries('dashboard-thoughts')
         navigate(-1)
       },
       onError: (error) => {
-        console.log(error)
-        setMessage({ error: error.message })
+        setMessage({ error: error?.response?.data?.error || error.message })
       }
     }
   )

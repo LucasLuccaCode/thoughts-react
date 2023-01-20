@@ -82,12 +82,14 @@ module.exports = class ThoughtController {
   }
 
   static async update(req, res) {
-    const { content } = req.body
-    const { thoughtId } = req.params
-    const userId = Number(req.body.userId)
-    const tokenUserId = req.user.id
-
     try {
+      const { content } = req.body
+      const { thoughtId } = req.params
+      const userId = Number(req.body.userId)
+      const tokenUserId = req.user.id
+
+      if (!content) return res.status(400).json({ error: "Escreva algo para atualizar" })
+
       const userIdsMatch = tokenUserId === userId
       if (!userIdsMatch) return res.status(401).json({ error: "Acesso negado!" })
 
