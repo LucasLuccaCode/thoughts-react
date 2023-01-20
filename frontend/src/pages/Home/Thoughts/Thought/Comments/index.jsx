@@ -1,9 +1,8 @@
 import Comment from './Comment'
 import './styles.css'
 
-export default function Comments({ thought }) {
+export default function Comments({ comments }) {
   
-  const comments = thought.comments
   console.log(comments)
 
   return (
@@ -19,7 +18,7 @@ export default function Comments({ thought }) {
       </div>
 
       <ul className="c-thoughts__comments">
-        <Comment comments={thought.comments} />
+        <Comment comment={comments[0]} />
       </ul>
 
 

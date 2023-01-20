@@ -15,7 +15,6 @@ const Thought = require("./src/models/Thought")
 const Comment = require("./src/models/Comment")
 const Like = require("./src/models/Like")
 
-
 // Handle with form data and json
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())

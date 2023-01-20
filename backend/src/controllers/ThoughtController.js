@@ -51,6 +51,10 @@ module.exports = class ThoughtController {
           {
             association: "likes",
             attributes: ['userId']
+          },
+          {
+            association: "comments",
+            attributes: { exclude: ['updatedAt'] }
           }
         ],
         order: [["createdAt", orderBy]]

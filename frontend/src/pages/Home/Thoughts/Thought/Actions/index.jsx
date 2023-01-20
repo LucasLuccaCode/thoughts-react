@@ -3,7 +3,7 @@ import { useMessage } from '../../../../../contexts/messageContext'
 import { api } from '../../../../../services/api'
 import './styles.css'
 
-export default function Actions({ userId, likes, thoughtId }) {
+export default function Actions({ userId, likes, thoughtId, totalComments }) {
   const { setMessage } = useMessage()
 
   const queryClient = useQueryClient()
@@ -36,7 +36,7 @@ export default function Actions({ userId, likes, thoughtId }) {
       <li id="comments">
         <button type="submit">
           <i className="bi bi-chat-dots"></i>
-          <span>0</span>
+          <span>{totalComments}</span>
         </button>
       </li>
       <li id="favorite">

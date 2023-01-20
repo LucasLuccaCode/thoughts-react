@@ -15,10 +15,11 @@ function Thought({ thought }) {
       <Content thought={thought} />
       <Actions 
         userId={user?.id} 
-        likes={thought.likes} 
+        likes={thought.likes}
+        totalComments={thought.comments.length} 
         thoughtId={thought.id} 
         />
-      <Comments thought={thought} />
+      <Comments comments={thought.comments} />
       <Form 
         userId={user?.id} 
         thoughtId={thought.id} 

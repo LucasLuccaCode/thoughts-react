@@ -3,13 +3,12 @@ const Comment = require("../models/Comment")
 
 module.exports = class ThoughtController {
   static async create(req, res) {
-    const { content } = req.body
-    const userId = Number(req.body.userId)
-    const { thoughtId } = req.params
-    const tokenUserId = req.user.id
-
-
     try {
+      const { content } = req.body
+      const userId = Number(req.body.userId)
+      const { thoughtId } = req.params
+      const tokenUserId = req.user.id
+
       const userIdsMatch = tokenUserId === userId
       if (!userIdsMatch) return res.status(401).json({ error: "Acesso negado!" })
 

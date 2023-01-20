@@ -1,6 +1,6 @@
 import './styles.css'
 
-export default function Comment({ comments }) {
+export default function Comment({ comment }) {
 
   const authorAvatar = 'https://montinkantigo.s3.amazonaws.com/data/camisas/pain---naruto-5bd112380051b-estampa-306.png'
 
