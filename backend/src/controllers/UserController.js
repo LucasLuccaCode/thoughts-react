@@ -10,7 +10,7 @@ module.exports = class UserController {
       if (userId !== tokenUserId) return res.status(401).json({ error: "Acesso negado!" })
 
       const user = await User.findByPk(tokenUserId, {
-        attributes: ['id', 'name', 'email'],
+        attributes: ['id', 'name', 'email', 'avatar'],
         include: {
           model: Thought,
           as: "thoughts",

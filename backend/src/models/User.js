@@ -18,7 +18,8 @@ User.init({
   password: {
     type: DataTypes.STRING,
     allowNull: false
-  }
+  },
+  avatar: DataTypes.STRING
 }, {
   sequelize,
   modelName: "user"

@@ -46,7 +46,7 @@ module.exports = class ThoughtController {
         include: [
           {
             association: "author",
-            attributes: ['name']
+            attributes: ['name', 'avatar']
           },
           {
             association: "likes",
