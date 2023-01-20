@@ -1,21 +1,21 @@
-import { useMessage } from "../../../contexts/message"
+import { useMessage } from "../../../contexts/messageContext"
 import { useNavigate, useParams } from "react-router-dom"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback } from "react"
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useThoughts } from "../../../contexts/thoughts"
 import { api } from "../../../services/api"
 
 import ThoughtForm from "../../../components/ThoughtForm"
 import Modal from "../../../components/Modal"
 
 export default function EditThought() {
-  const navigate = useNavigate()
   const { setMessage } = useMessage()
   const { thoughtId } = useParams()
+  const navigate = useNavigate()
+
   const queryClient = useQueryClient()
 
-  const { data, isLoadingError, error } = useQuery(
+  const { data, error } = useQuery(
     [`thought-${thoughtId}`],
     () => api.get(`/thoughts/${thoughtId}`),
     {
@@ -39,15 +39,21 @@ export default function EditThought() {
     }
   )
 
-  const thought = data?.data?.thought
+  const thought = data?.data.thought
 
   const handleEditThought = useCallback(async (e) => {
     e.preventDefault()
+
     const formData = new FormData(e.target)
     const data = Object.fromEntries(formData)
 
-    mutate({ thoughtId: thought.id, data })
+    mutate({ thoughtId, data })
   }, [thought])
+
+  if (error) {
+    setMessage({ error: error.message || 'Erro desconhecido' })
+    return
+  }
 
   return (
     <Modal>

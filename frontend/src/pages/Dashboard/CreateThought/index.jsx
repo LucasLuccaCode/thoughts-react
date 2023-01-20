@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 import { useNavigate } from "react-router-dom"
-import { useMessage } from "../../../contexts/message"
+import { useMessage } from "../../../contexts/messageContext"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { api } from "../../../services/api"

@@ -124,7 +124,7 @@ button {
   color: var(--details-color);
 }
 
-.error {
+.server-error {
   color: #ffefef;
   border-radius: .2rem;
   margin: 1rem auto;

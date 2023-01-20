@@ -1,7 +1,8 @@
 import { Link, Outlet } from "react-router-dom"
-import { ThoughtsProvider } from "../../contexts/thoughts"
-import DashboardThoughts from "./DashboardThoughts"
+import { DashboardProvider } from "../../contexts/dashboardContext"
 import "./styles.css"
+
+import DashboardThoughts from "./DashboardThoughts"
 
 export default function Dashboard() {
   return (
@@ -11,13 +12,13 @@ export default function Dashboard() {
         <Link className="btn" to={`add`}>Adicionar pensamento</Link>
       </div>
 
-      <ThoughtsProvider>
+      <DashboardProvider>
         <DashboardThoughts />
 
         <div className="c-dashboard__detail">
           <Outlet />
         </div>
-      </ThoughtsProvider>
+      </DashboardProvider>
     </div>
   )
 }

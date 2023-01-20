@@ -1,6 +1,6 @@
 import { Form } from "react-router-dom";
-import { useAuth } from "../../../../contexts/auth"
-import { useMessage } from "../../../../contexts/message"
+import { useAuth } from "../../../../contexts/authContext"
+import { useMessage } from "../../../../contexts/messageContext"
 import { api } from "../../../../services/api";
 import "./styles.css"
 

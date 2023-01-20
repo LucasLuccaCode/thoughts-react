@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { useMessage } from "../../contexts/message"
+import { useMessage } from "../../contexts/messageContext"
 import "./styles.css"
 
 export default function Messages() {

@@ -1,5 +1,5 @@
 import { Form } from "react-router-dom";
-import { useAuth } from "../../contexts/auth";
+import { useAuth } from "../../contexts/authContext";
 
 export default function ThoughtForm({ thought, btnText, handleForm }) {
   const { user } = useAuth()

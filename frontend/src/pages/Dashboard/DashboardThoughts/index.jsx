@@ -3,20 +3,19 @@ import { Link } from "react-router-dom"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import "./styles.css"
 
-import { useThoughts } from "../../../contexts/thoughts"
-import { useMessage } from "../../../contexts/message"
+import { useDashboardThoughts } from "../../../contexts/dashboardContext"
+import { useMessage } from "../../../contexts/messageContext"
 import { api } from "../../../services/api"
-
-import Loader from "../../../components/Loader"
+import ThoughtCard from "./ThoughtCard"
 
 export default function DashboardThoughts() {
   const [currentPage, setCurrentPage] = useState(10)
-  const { thoughts } = useThoughts()
+  const { thoughts } = useDashboardThoughts()
   const { setMessage } = useMessage()
 
   const queryClient = useQueryClient()
 
-  const { mutate, isLoading } = useMutation(
+  const { mutate } = useMutation(
     (thoughtId) => api.delete(`/thoughts/${thoughtId}`),
     {
       onSuccess: (data, variables, context) => {
@@ -47,16 +46,7 @@ export default function DashboardThoughts() {
             <ul className="c-dashboard__thoughts">
               {
                 thoughts?.slice(0, currentPage).map(thought => (
-                  <li key={thought.id}>
-                    <h3>&#8220; {thought.content} &#8220;</h3>
-                    <div className="c-dashboard__thoughts__actions">
-                      <Link className="btn" to={`${thought.id}/edit`}>Editar</Link>
-
-                      <button className="btn" onClick={() => mutate(thought.id)}>
-                        Deletar
-                      </button>
-                    </div>
-                  </li>
+                  <ThoughtCard thought={thought} deleteThought={() => mutate(thought.id)} key={thought.id} />
                 ))
 
               }
@@ -70,13 +60,8 @@ export default function DashboardThoughts() {
         )
       }
       {
-        !thoughts.length && !isLoading && (
+        !thoughts.length && (
           <p className="empty">Nenhum pensamento publicado, <Link to={`add`}>clique aqui</Link> para adicionar um.</p>
-        )
-      }
-      {
-        !thoughts.length && isLoading && (
-          <Loader />
         )
       }
     </div >
