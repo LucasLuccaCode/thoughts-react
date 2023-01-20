@@ -1,0 +1,61 @@
+.c-comments__card {
+  display: flex;
+  gap: .5rem;
+  width: 100%;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: #efefff;
+  margin-bottom: .5rem;
+}
+
+.c-comments__card__content {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  padding: .4rem;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: .6rem;
+}
+
+.c-comments__card__content h4 {
+  font-size: .6rem;
+  color: #cacad0;
+}
+
+.c-comments__card__content div {
+  font-size: .55rem;
+  color: #babac0;
+  line-height: .8rem;
+}
+
+
+.c-comments__card__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-top: .3rem;
+  border-top: 1.5px solid rgba(255, 255, 255, .1);
+
+}
+
+.hidden {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.c-comments__card__actions a {
+  font-size: 0.55rem;
+  color: #dadae0;
+  transition: .2s linear;
+  /* text-decoration: none; */
+}
+
+.c-comments__card__actions span {
+  color: #aaaab0;
+  font-size: 0.65rem;
+}
+
+.c-comments__card__actions a:hover {
+  text-decoration: underline;
+  color: #fff;
+}

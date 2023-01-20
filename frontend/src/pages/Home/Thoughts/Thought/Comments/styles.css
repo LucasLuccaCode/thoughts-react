@@ -1,0 +1,48 @@
+.c-thoughts__comments__container {
+  padding: .6rem var(--margin-h);
+  border-top: 2px solid rgba(255, 255, 255, .05);
+  max-height: 350px;
+  overflow: hidden;
+  overflow-y: auto;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  background: #121212;
+}
+
+.c-thoughts__comments__container::-webkit-scrollbar {
+  width: .2rem;
+}
+
+.c-thoughts__comments__container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.c-thoughts__comments__container::-webkit-scrollbar-thumb {
+  background-color: var(--details-color);
+  border-radius: 20px;
+}
+
+.c-thoughts__comments__title {
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+  font-size: .65rem;
+  color: #babac0;
+}
+
+.c-thoughts__comments__title .show-more {
+  cursor: pointer;
+}
+
+.c-thoughts__comments__title .show-more:hover {
+  text-decoration: underline;
+}
+
+/* .c-thoughts__comments__title .status-pagination {
+  font-weight: bold;
+} */
+
+.c-thoughts__comments {
+  width: 100%;
+  margin-top: .8rem;
+}

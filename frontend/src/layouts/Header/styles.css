@@ -1,4 +1,4 @@
-header {
+.c-header {
   width: 100%;
   /* background: var(--secondary-color); */
   position: sticky;
@@ -8,7 +8,7 @@ header {
   background: rgba(255, 255, 255, .05);
 }
 
-header nav {
+.c-header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,12 +17,12 @@ header nav {
   padding: 0 var(--margin-h);
 }
 
-header nav #logo {
+.c-header nav #logo {
   display: flex;
   align-items: center;
 }
 
-header nav #logo span {
+.c-header nav #logo span {
   font-weight: bold;
   font-family: serif;
   color: var(--details-color);
@@ -30,46 +30,48 @@ header nav #logo span {
   margin-left: .4rem;
 }
 
-header nav #logo img {
+.c-header nav #logo img {
   width: 1rem;
   height: 1rem;
 }
 
-header ul {
+.c-header ul {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-header li a,
-header li button {
+.c-header li a,
+.c-header li button {
   cursor: pointer;
   display: flex;
   align-items: center;
+  height: auto;
   padding: .7rem var(--margin-h);
   font-size: .75rem;
-  font-family: sans-serif;
   color: #aaaab0;
-  transition: .3s ease;
+  font-family: sans-serif;
+  text-transform: capitalize;
   background: transparent;
-  height: auto;
+  transition: .3s ease;
 }
 
-header li a:hover,
-header li button:hover {
+.c-header li a:hover,
+.c-header li button:hover {
   color: #fff;
   background: #4a4a50;
 }
 
-header li button {
+.c-header li button {
   padding: .3rem;
   border-radius: 50px;
   margin-left: .5rem;
 }
 
-header li img {
-  width: 1.2rem;
-  height: 1.2rem;
+.c-header .avatar {
+  min-width: 1rem;
+  min-height: 1rem;
+  width: 1rem;
+  height: 1rem;
   margin-right: .3rem;
-  border-radius: 50px;
 }

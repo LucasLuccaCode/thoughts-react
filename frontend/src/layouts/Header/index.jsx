@@ -14,7 +14,7 @@ export default function Header() {
     : 'https://montinkantigo.s3.amazonaws.com/data/camisas/pain---naruto-5bd112380051b-estampa-306.png'
 
   return (
-    <header>
+    <header className="c-header">
       <nav>
         <Link to={`/`} id="logo">
           <img src="/img/thoughts_logo.png" alt="Thoughts" />
@@ -33,7 +33,7 @@ export default function Header() {
                 </li>
                 <li title="Sair">
                   <button onClick={handleLogout}>
-                    <img src={avatarUrl} alt={`Foto de perfil do ${user.name}`} />
+                    <img src={avatarUrl} className="avatar" alt={`Foto de perfil do ${user.name}`} />
                     {user.name}
                   </button>
                 </li>
