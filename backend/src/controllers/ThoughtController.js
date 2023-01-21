@@ -54,7 +54,11 @@ module.exports = class ThoughtController {
           },
           {
             association: "comments",
-            attributes: { exclude: ['updatedAt'] }
+            attributes: { exclude: ['updatedAt'] },
+            include: {
+              association: "author",
+              attributes: ['name']
+            }
           }
         ],
         order: [["createdAt", orderBy]]

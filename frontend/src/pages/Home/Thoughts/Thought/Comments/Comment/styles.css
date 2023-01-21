@@ -20,6 +20,7 @@
 .c-comments__card__content h4 {
   font-size: .6rem;
   color: #cacad0;
+  text-transform: capitalize;
 }
 
 .c-comments__card__content div {

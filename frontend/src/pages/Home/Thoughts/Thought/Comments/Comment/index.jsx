@@ -9,13 +9,9 @@ export default function Comment({ comment }) {
       <div className="avatar" style={{ backgroundImage: `url(${authorAvatar})` }}></div>
 
       <div className="c-comments__card__content">
-        <h4>John Joe</h4>
+        <h4>{ comment.author.name }</h4>
 
-        <div className='comment-text'>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Consectetur natus nobis excepturi, vel sed cum obcaecati reiciendis exercitationem,
-          autem non ducimus eos libero at. Consequatur culpa labore quaerat enim quia!
-        </div>
+        <div className='comment-text'>{comment.content}</div>
 
         <ul className="c-comments__card__actions">
           <li>
