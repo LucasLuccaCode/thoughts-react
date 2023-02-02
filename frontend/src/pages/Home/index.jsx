@@ -2,7 +2,8 @@ import { api } from "../../services/api";
 import "./styles.css"
 
 import HomeTitle from "./HomeTItle";
-import Thoughts from "./Thoughts";
+import Thoughts from "../../components/Thoughts";
+import { Outlet } from "react-router-dom";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -34,6 +35,8 @@ export default function Home() {
     <div className="c-home__thoughts">
       <HomeTitle search={''} />
       <Thoughts />
+
+      <Outlet />
     </div>
   )
 }

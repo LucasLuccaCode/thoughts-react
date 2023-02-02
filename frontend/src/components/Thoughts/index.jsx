@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react"
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../../../services/api";
+import { api } from "../../services/api";
 import "./styles.css"
 
-import Thought from "./Thought"
-import Loader from "../../../components/Loader";
+import Thought from "../Thought"
+import Loader from "../Loader";
 
 export default function Thoughts() {
   const [currentPage, setCurrentPage] = useState(10)

@@ -51,16 +51,14 @@ export default function EditThought() {
 
   return (
     <Modal>
-      <div className="c-modal__content">
-        <h1>Editar pensamento</h1>
+      <h1>Editar pensamento</h1>
 
-        <ThoughtForm
-          thought={thought}
-          btnText="Atualizar"
-          handleForm={handleEditThought}
-          isLoading={isLoading}
-        />
-      </div>
+      <ThoughtForm
+        thought={thought}
+        btnText="Atualizar"
+        handleForm={handleEditThought}
+        isLoading={isLoading}
+      />
     </Modal>
   )
 }

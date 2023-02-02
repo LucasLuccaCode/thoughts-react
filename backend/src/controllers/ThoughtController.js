@@ -77,7 +77,17 @@ module.exports = class ThoughtController {
     try {
       const { thoughtId } = req.params
 
-      const thought = await Thought.findByPk(thoughtId)
+      const thought = await Thought.findByPk(thoughtId, {
+        include: [
+          {
+            association: 'author'
+          },
+          {
+            association: 'comments',
+            include: 'author'
+          }
+        ]
+      })
       if (!thought) return res.status(400).json({ error: "Pensamento não encontrado" })
 
       res.status(200).json({

@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useMessage } from '../../../../../contexts/messageContext'
-import { api } from '../../../../../services/api'
+import { Link } from 'react-router-dom'
 import './styles.css'
 
-export default function Actions({ userId, likes, thoughtId, totalComments }) {
+import { api } from '../../services/api'
+import { useMessage } from '../../contexts/messageContext'
+
+export default function ThoughtActions({ userId, likes, thoughtId, totalComments }) {
   const { setMessage } = useMessage()
 
   const queryClient = useQueryClient()
@@ -34,10 +36,10 @@ export default function Actions({ userId, likes, thoughtId, totalComments }) {
         </button>
       </li>
       <li id="comments">
-        <button type="submit">
+        <Link to={`/thought/${thoughtId}`}>
           <i className="bi bi-chat-dots"></i>
           <span>{totalComments}</span>
-        </button>
+        </Link>
       </li>
       <li id="favorite">
         <button type="submit">

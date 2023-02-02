@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useMessage } from "../../../../../contexts/messageContext"
-import { api } from "../../../../../services/api"
 import './styles.css'
 
-export default function Form({ userId, thoughtId }) {
+import { useMessage } from "../../contexts/messageContext";
+import { api } from "../../services/api";
+
+export default function ThoughtAddComment({ userId, thoughtId }) {
   const [content, setContent] = useState("")
   const { setMessage } = useMessage()
 
@@ -31,12 +32,12 @@ export default function Form({ userId, thoughtId }) {
   }
 
   return (
-    <form onSubmit={handleForm} className="c-thoughts__form" method="POST">
+    <form onSubmit={handleForm} className="c-add_comment" method="POST">
       <div className="avatar" style={{ backgroundImage: `url(${userAvatar})` }}></div>
       <input
         type="text"
         name="content"
-        className="c-thoughts__form__content"
+        className="c-add_comment__content"
         placeholder="Escreva um comentário aqui"
         value={content}
         onChange={e => setContent(e.target.value)}

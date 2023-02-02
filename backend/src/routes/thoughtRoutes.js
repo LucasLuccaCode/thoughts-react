@@ -12,7 +12,7 @@ router.route("/")
   .post(verifyToken, ThoughtController.create)
 
 router.route("/:thoughtId")
-  .get(verifyToken, ThoughtController.getById)
+  .get(ThoughtController.getById)
   .put(verifyToken, ThoughtController.update)
   .delete(verifyToken, ThoughtController.delete)
 

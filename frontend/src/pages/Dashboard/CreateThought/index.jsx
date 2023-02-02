@@ -38,15 +38,13 @@ export default function CreateThought() {
 
   return (
     <Modal>
-      <div className="c-modal__content">
-        <h1>Publicar pensamento</h1>
+      <h1>Publicar pensamento</h1>
 
-        <ThoughtForm
-          thought={{}}
-          btnText="Adicionar"
-          handleForm={handleCreateThought}
-        />
-      </div>
+      <ThoughtForm
+        thought={{}}
+        btnText="Adicionar"
+        handleForm={handleCreateThought}
+      />
     </Modal>
   )
 }

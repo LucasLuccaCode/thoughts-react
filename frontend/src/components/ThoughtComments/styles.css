@@ -1,8 +1,9 @@
 .c-thoughts__comments__container {
   padding: .6rem var(--margin-h);
   border-top: 2px solid rgba(255, 255, 255, .05);
-  max-height: 350px;
+  max-height: 50vh;
   overflow: hidden;
+  width: auto;
   overflow-y: auto;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
@@ -45,4 +46,10 @@
 .c-thoughts__comments {
   width: 100%;
   margin-top: .8rem;
+}
+
+.c-thoughts__comments__container .no-comments {
+  font-size: .7rem;
+  color: #aaaab0;
+  text-align: center;
 }

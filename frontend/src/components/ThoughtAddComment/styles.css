@@ -1,11 +1,10 @@
-.c-thoughts__form {
+.c-add_comment {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: .5rem var(--margin-h);
 }
 
-.c-thoughts__form__content {
+.c-add_comment__content {
   flex: 1;
   margin-left: .5rem;
   padding: .4rem .5rem;
@@ -16,16 +15,16 @@
   transition: .2s linear;
 }
 
-.c-thoughts__form__content::placeholder {
+.c-add_comment__content::placeholder {
   color: #8a8a90;
 }
 
-.c-thoughts__form__content:focus {
+.c-add_comment__content:focus {
   background: #222222;
   color: #dadae0;
 }
 
-.c-thoughts__form button {
+.c-add_comment button {
   cursor: pointer;
   background: transparent;
   border-radius: 50px;

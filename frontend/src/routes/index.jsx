@@ -9,6 +9,7 @@ import Dashboard from '../pages/Dashboard'
 import DashboardCreate from '../pages/Dashboard/CreateThought'
 import DashboardEditThought from '../pages/Dashboard/EditThought'
 import Home from '../pages/Home'
+import ThoughtView from '../pages/ThoughtView'
 
 import { PrivateRoute } from "./privateRoutes"
 
@@ -20,7 +21,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
+        children: [
+          {
+            path: "/thought/:thoughtId",
+            element: <ThoughtView />
+          }
+        ]
       },
       {
         path: "/dashboard",
