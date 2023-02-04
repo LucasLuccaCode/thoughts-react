@@ -5,6 +5,7 @@ import Root from '../pages/Root'
 import NotFound from '../pages/NotFound'
 import Register from '../pages/Register'
 import Login from '../pages/Login'
+import Favorites from '../pages/Favorites'
 import Dashboard from '../pages/Dashboard'
 import DashboardCreate from '../pages/Dashboard/CreateThought'
 import DashboardEditThought from '../pages/Dashboard/EditThought'
@@ -26,6 +27,16 @@ const router = createBrowserRouter([
           {
             path: "/thought/:thoughtId",
             element: <ThoughtView />
+          }
+        ]
+      },
+      {
+        path: "/favorites",
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/favorites",
+            element: <Favorites />
           }
         ]
       },

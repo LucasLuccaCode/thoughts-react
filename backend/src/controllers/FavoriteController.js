@@ -30,20 +30,50 @@ module.exports = class FavoriteController {
   static async getFavoritesByUser(req, res) {
     try {
       const { id: userId } = req.user
+      console.log(userId)
 
       const user = await User.findByPk(userId, {
-        include: [{
-          model: Thought,
-          attributes: ['id', 'content'],
-          as: 'favorites',
-          through: { attributes: [] }
-        }],
+        include: [
+          {
+            model: Thought,
+            attributes: ['id', 'content'],
+            as: 'favorites',
+            through: {
+              attributes: []
+            },
+            include: [
+              {
+                association: "author",
+                attributes: ['name', 'avatar']
+              },
+              {
+                association: "likes",
+                attributes: ['userId']
+              },
+              {
+                association: "comments",
+                attributes: { exclude: ['updatedAt'] },
+                include: {
+                  association: "author",
+                  attributes: ['name']
+                }
+              },
+              {
+                association: 'fans',
+                attributes: ['id'],
+                through: {
+                  attributes: []
+                },
+              }
+            ]
+          },
+        ],
       });
-  
+
       if (!user) {
         return res.status(404).json({ error: 'Usuário não encontrado' });
       }
-  
+
       return res.status(200).json({
         error: null,
         favorites: user.favorites

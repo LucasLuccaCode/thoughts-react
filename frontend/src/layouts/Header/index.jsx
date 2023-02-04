@@ -29,6 +29,9 @@ export default function Header() {
             user ? (
               <>
                 <li>
+                  <Link to={`/favorites`}>Favoritos</Link>
+                </li>
+                <li>
                   <Link to={`/dashboard`}>Dashboard</Link>
                 </li>
                 <li title="Sair">

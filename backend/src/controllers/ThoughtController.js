@@ -59,6 +59,13 @@ module.exports = class ThoughtController {
               association: "author",
               attributes: ['name']
             }
+          },
+          {
+            association: 'fans',
+            attributes: ['id'],
+            through: {
+              attributes: []
+            },
           }
         ],
         order: [["createdAt", orderBy]]

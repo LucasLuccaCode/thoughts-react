@@ -39,6 +39,8 @@
 }
 
 i.bi-heart-fill,
-i.bi-heart-fill ~ span {
+i.bi-heart-fill ~ span,
+i.bi-star-fill,
+i.bi-star-fill ~ span {
   color: var(--details-color);
 }

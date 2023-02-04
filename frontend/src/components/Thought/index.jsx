@@ -14,6 +14,7 @@ function Thought({ thought }) {
       <ThoughtActions
         userId={user?.id}
         likes={thought.likes}
+        fans={thought.fans}
         totalComments={thought.comments.length}
         thoughtId={thought.id}
       />
