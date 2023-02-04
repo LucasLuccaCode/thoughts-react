@@ -25,6 +25,9 @@ app.use(morgan("dev"))
 const authRoutes = require("./src/routes/authRoutes")
 app.use("/", authRoutes)
 
+const favoriteRoutes = require("./src/routes/favoriteRoutes")
+app.use("/users", favoriteRoutes)
+
 const userRoutes = require("./src/routes/userRoutes")
 app.use("/users", userRoutes)
 
