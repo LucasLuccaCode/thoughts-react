@@ -8,6 +8,7 @@ import Modal from "../../components/Modal";
 import Loader from "../../components/Loader";
 import ThoughtComments from "../../components/ThoughtComments";
 import ThoughtAddComment from "../../components/ThoughtAddComment";
+import { CommentsProvider } from "../../contexts/commentsContext";
 
 export default function ThoughtView() {
   const { user } = useAuth()
@@ -33,8 +34,11 @@ export default function ThoughtView() {
               <h2>&#8220;{thought?.content}&#8221;</h2>
               <h3>by <span>{thought?.author.name}</span></h3>
             </div>
-            <ThoughtComments comments={thought?.comments} />
-            <ThoughtAddComment userId={user?.id} thoughtId={thought?.id} />
+
+            <CommentsProvider comments={thought?.comments}>
+              <ThoughtComments comments={thought?.comments} />
+              <ThoughtAddComment userId={user?.id} thoughtId={thought?.id} />
+            </CommentsProvider>
           </div>
         )
       }

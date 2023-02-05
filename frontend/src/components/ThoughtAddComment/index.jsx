@@ -2,11 +2,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import './styles.css'
 
+import { useComments } from "../../contexts/commentsContext";
 import { useMessage } from "../../contexts/messageContext";
 import { api } from "../../services/api";
 
 export default function ThoughtAddComment({ userId, thoughtId }) {
   const [content, setContent] = useState("")
+  const {setCommentsPage} = useComments()
   const { setMessage } = useMessage()
 
   const queryClient = useQueryClient()
@@ -17,6 +19,7 @@ export default function ThoughtAddComment({ userId, thoughtId }) {
       retry: false,
       onSuccess: (data) => {
         setContent("")
+        setCommentsPage(10000)
         queryClient.invalidateQueries('home-thoughts')
       },
       onError: (error) => {

@@ -91,7 +91,9 @@ module.exports = class ThoughtController {
           },
           {
             association: 'comments',
-            include: 'author'
+            include: {
+              association: 'author'
+            }
           }
         ]
       })

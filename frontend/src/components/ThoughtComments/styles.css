@@ -23,29 +23,30 @@
   border-radius: 20px;
 }
 
-.c-thoughts__comments__title {
+.c-thoughts__comments__show_more {
   display: flex;
   justify-content: space-between;
   gap: .5rem;
+  margin-top: .8rem;
   font-size: .65rem;
   color: #babac0;
 }
 
-.c-thoughts__comments__title .show-more {
+.c-thoughts__comments__show_more .show-more {
   cursor: pointer;
 }
 
-.c-thoughts__comments__title .show-more:hover {
+.c-thoughts__comments__show_more .show-more:hover {
   text-decoration: underline;
 }
 
-/* .c-thoughts__comments__title .status-pagination {
+/* .c-thoughts__comments__show_more .status-pagination {
   font-weight: bold;
 } */
 
 .c-thoughts__comments {
   width: 100%;
-  margin-top: .8rem;
+  scroll-behavior: smooth;
 }
 
 .c-thoughts__comments__container .no-comments {
