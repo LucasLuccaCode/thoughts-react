@@ -30,7 +30,6 @@ module.exports = class FavoriteController {
   static async getFavoritesByUser(req, res) {
     try {
       const { id: userId } = req.user
-      console.log(userId)
 
       const user = await User.findByPk(userId, {
         include: [
@@ -65,9 +64,10 @@ module.exports = class FavoriteController {
                   attributes: []
                 },
               }
-            ]
+            ],
           },
         ],
+        order: [[{ model: Thought, as: 'favorites' }, 'createdAt', 'DESC']]
       });
 
       if (!user) {

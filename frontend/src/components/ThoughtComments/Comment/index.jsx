@@ -1,7 +1,7 @@
 import './styles.css'
+import { formatDate } from '../../../utils/formateDate'
 
 export default function Comment({ comment }) {
-
   const authorAvatar = 'https://montinkantigo.s3.amazonaws.com/data/camisas/pain---naruto-5bd112380051b-estampa-306.png'
 
   return (
@@ -9,7 +9,7 @@ export default function Comment({ comment }) {
       <div className="avatar" style={{ backgroundImage: `url(${authorAvatar})` }}></div>
 
       <div className="c-comments__card__content">
-        <h4>{ comment.author.name }</h4>
+        <h4>{comment.author.name}</h4>
 
         <div className='comment-text'>{comment.content}</div>
 
@@ -25,6 +25,9 @@ export default function Comment({ comment }) {
           </li>
           <li>
             <a href="#">Responder</a>
+          </li>
+          <li>
+            <a href="#">{formatDate(comment.createdAt)}</a>
           </li>
         </ul>
       </div>

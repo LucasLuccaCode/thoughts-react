@@ -1,16 +1,47 @@
-.c-thoughts__card h2 {
-  padding: .8rem .8rem 0rem;
-  font-size: .9rem;
-  font-style: italic;
-  font-weight: bold;
+.c-thoughts__card .avatar {
 }
 
-.c-thoughts__card h3 {
-  padding: .8rem;
-  font-size: .6rem;
+.c-thoughts__card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: .5rem;
 }
 
-.c-thoughts__card h3 span {
-  color: var(--details-color);
+.c-thoughts__header__title {
+  display: flex;
+  gap: .5rem;
+}
+
+.c-thoughts__header__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.c-thoughts__header__info h2 {
+  font-size: .7rem;
   text-transform: capitalize;
 }
+
+.c-thoughts__header__info span {
+  display: flex;
+  align-items: center;
+  margin-top: .2rem;
+  font-size: .5rem;
+}
+
+.c-thoughts__header__info span:before {
+  content: '';
+  display: inline-block;
+  width: .2rem;
+  height: .2rem;
+  border-radius: 50px;
+  margin-right: .2rem;
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.c-thoughts__card__header h3 {
+  font-size: .8rem;
+  font-style: italic;
+}
+
